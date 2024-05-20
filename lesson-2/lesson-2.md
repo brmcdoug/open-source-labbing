@@ -84,4 +84,10 @@ bmcdougall/frr-srv6-usid   latest    e9bfec1bb684   6 months ago    1.99GB
 
 6. Build a Containerlab topology YAML file: [3-node.yaml](3-node.yaml)
 
-7. Define router configurations:  
+7. Define router configurations:  [config](config)
+   Note: FRR has both an frr.conf file where router interfaces and features are defined and configure, and a 'daemons' file where specific routing daemons such as OSPF may be enabled or disabled
+
+8. Deploy the topology: 
+```
+sudo containerlab deploy -t 3-node.yaml 
+```
