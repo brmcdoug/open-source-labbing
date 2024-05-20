@@ -35,7 +35,7 @@ topology:
       image: frr-srv6-usid-ubuntu22:latest
       binds:
         - config/frr-2/daemons:/etc/frr/daemons
-        - config/frr-2/frr-1.conf:/etc/frr/frr.conf
+        - config/frr-2/frr-2.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.2.102
       #mgmt-ipv6: 2001:172:20:2::102
 
