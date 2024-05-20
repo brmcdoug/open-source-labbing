@@ -16,7 +16,7 @@ name: 3-node
 
 mgmt:
   network: frr_mgt_net
-  ipv4_subnet: 172.20.1.0/24
+  ipv4-subnet: 172.20.1.0/24
   #ipv6_subnet: 2001:172:20:2::/80
 
 topology:
@@ -65,5 +65,5 @@ topology:
     - endpoints: ["frr-1:eth3", "pc-1:eth1"]
 
     - endpoints: ["frr-2:eth2", "frr-3:eth1"]
-    - endpoints: ["frr-3:eth2", "frr-5:eth1"]  
+    
     - endpoints: ["frr-3:eth3", "pc-2:eth1"]
