@@ -23,7 +23,7 @@ topology:
   nodes:
     frr-1:
       kind: linux
-      image: frr-srv6-usid-ubuntu22:latest
+      image: bmcdougall/frr-srv6-usid:latest
       binds:
         - config/frr-1/daemons:/etc/frr/daemons
         - config/frr-1/frr-1.conf:/etc/frr/frr.conf
@@ -32,7 +32,7 @@ topology:
 
     frr-2:
       kind: linux
-      image: frr-srv6-usid-ubuntu22:latest
+      image: bmcdougall/frr-srv6-usid:latest
       binds:
         - config/frr-2/daemons:/etc/frr/daemons
         - config/frr-2/frr-2.conf:/etc/frr/frr.conf
@@ -41,7 +41,7 @@ topology:
 
     frr-3:
       kind: linux
-      image: frr-srv6-usid-ubuntu22:latest
+      image: bmcdougall/frr-srv6-usid:latest
       binds:
         - config/frr-3/daemons:/etc/frr/daemons
         - config/frr-3/frr-3.conf:/etc/frr/frr.conf
@@ -65,5 +65,5 @@ topology:
     - endpoints: ["frr-1:eth3", "pc-1:eth1"]
 
     - endpoints: ["frr-2:eth2", "frr-3:eth1"]
-    
+
     - endpoints: ["frr-3:eth3", "pc-2:eth1"]
