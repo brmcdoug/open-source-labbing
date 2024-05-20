@@ -83,3 +83,5 @@ bmcdougall/frr-srv6-usid   latest    e9bfec1bb684   6 months ago    1.99GB
 ```
 
 6. Build a Containerlab topology YAML file
+
+[3-node.yaml](3-node.yaml)
