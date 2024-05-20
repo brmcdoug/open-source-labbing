@@ -17,7 +17,6 @@ name: 3-node
 mgmt:
   network: frr_mgt_net
   ipv4-subnet: 172.20.1.0/24
-  #ipv6_subnet: 2001:172:20:2::/80
 
 topology:
   nodes:
@@ -28,7 +27,6 @@ topology:
         - config/frr-1/daemons:/etc/frr/daemons
         - config/frr-1/frr-1.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.101
-      #mgmt-ipv6: 2001:172:20:2::101
 
     frr-2:
       kind: linux
@@ -36,8 +34,7 @@ topology:
       binds:
         - config/frr-2/daemons:/etc/frr/daemons
         - config/frr-2/frr-2.conf:/etc/frr/frr.conf
-      mgmt-ipv4: 172.20.2.102
-      #mgmt-ipv6: 2001:172:20:2::102
+      mgmt-ipv4: 172.20.1.102
 
     frr-3:
       kind: linux
@@ -45,19 +42,17 @@ topology:
       binds:
         - config/frr-3/daemons:/etc/frr/daemons
         - config/frr-3/frr-3.conf:/etc/frr/frr.conf
-      mgmt-ipv4: 172.20.2.103
-      #mgmt-ipv6: 2001:172:20:2::103
-
+      mgmt-ipv4: 172.20.1.103
 
     pc-1:
       kind: linux
       image: praqma/network-multitool:latest
-      mgmt-ipv4: 172.20.2.111
+      mgmt-ipv4: 172.20.1.111
 
     pc-2:
       kind: linux
       image: praqma/network-multitool:latest
-      mgmt-ipv4: 172.20.2.112
+      mgmt-ipv4: 172.20.1.112
 
   links:
     - endpoints: ["frr-1:eth1", "frr-2:eth1"]
