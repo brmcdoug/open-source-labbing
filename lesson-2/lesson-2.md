@@ -91,3 +91,34 @@ bmcdougall/frr-srv6-usid   latest    e9bfec1bb684   6 months ago    1.99GB
 ```
 sudo containerlab deploy -t 3-node.yaml 
 ```
+
+Example output:
+```
+cisco@topology-host2:~/open-source-labbing/lesson-2$ sudo containerlab deploy -t 3-node.yaml 
+INFO[0000] Containerlab v0.54.2 started                 
+INFO[0000] Parsing & checking topology file: 3-node.yaml 
+INFO[0000] Creating docker network: Name="frr_mgt_net", IPv4Subnet="172.20.1.0/24", IPv6Subnet="", MTU=1500 
+INFO[0000] Creating lab directory: /home/cisco/open-source-labbing/lesson-2/clab-3-node 
+INFO[0000] Creating container: "frr-1"                  
+INFO[0000] Creating container: "frr-2"                  
+INFO[0000] Creating container: "frr-3"                  
+INFO[0000] Creating container: "pc-1"                   
+INFO[0000] Creating container: "pc-2"                   
+INFO[0001] Created link: frr-1:eth1 <--> frr-2:eth1     
+INFO[0001] Created link: frr-2:eth2 <--> frr-3:eth1     
+INFO[0001] Created link: frr-1:eth2 <--> frr-3:eth2     
+INFO[0001] Created link: frr-3:eth3 <--> pc-2:eth1      
+INFO[0001] Created link: frr-1:eth3 <--> pc-1:eth1      
+INFO[0001] Adding containerlab host entries to /etc/hosts file 
+INFO[0001] Adding ssh config for containerlab nodes     
++---+-------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
+| # |       Name        | Container ID |              Image              | Kind  |  State  |  IPv4 Address   | IPv6 Address |
++---+-------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
+| 1 | clab-3-node-frr-1 | 0c3d1c97be62 | bmcdougall/frr-srv6-usid:latest | linux | running | 172.20.1.101/24 | N/A          |
+| 2 | clab-3-node-frr-2 | a999b2e93f55 | bmcdougall/frr-srv6-usid:latest | linux | running | 172.20.1.102/24 | N/A          |
+| 3 | clab-3-node-frr-3 | b21bab2137af | bmcdougall/frr-srv6-usid:latest | linux | running | 172.20.1.103/24 | N/A          |
+| 4 | clab-3-node-pc-1  | c3ee0da37adb | praqma/network-multitool:latest | linux | running | 172.20.1.111/24 | N/A          |
+| 5 | clab-3-node-pc-2  | b6e8ceb0f049 | praqma/network-multitool:latest | linux | running | 172.20.1.112/24 | N/A          |
++---+-------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
+```
+
