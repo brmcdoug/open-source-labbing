@@ -23,7 +23,7 @@ topology:
     frr-1:
       kind: linux
       image: bmcdougall/frr-srv6-usid:latest
-      cmd: /etc/systemd/system/frr.sh
+      cmd: sudo systemctl start frr
       binds:
         - config/frr-1/daemons:/etc/frr/daemons
         - config/frr-1/frr-1.conf:/etc/frr/frr.conf
@@ -32,7 +32,7 @@ topology:
     frr-2:
       kind: linux
       image: bmcdougall/frr-srv6-usid:latest
-      cmd: /etc/systemd/system/frr.sh
+      cmd: sudo systemctl start frr
       binds:
         - config/frr-2/daemons:/etc/frr/daemons
         - config/frr-2/frr-2.conf:/etc/frr/frr.conf
@@ -41,7 +41,7 @@ topology:
     frr-3:
       kind: linux
       image: bmcdougall/frr-srv6-usid:latest
-      cmd: /etc/systemd/system/frr.sh
+      cmd: sudo systemctl start frr
       binds:
         - config/frr-3/daemons:/etc/frr/daemons
         - config/frr-3/frr-3.conf:/etc/frr/frr.conf
