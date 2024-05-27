@@ -1,5 +1,5 @@
 ### Note: the frr-srv6-usid-ubuntu22:latest image can be found on dockerhub at bmcdougall/frr-srv6-usid
-###   docker pull bmcdougall/frr-srv6-usid
+###   docker pull bmcdougall/frr-srv6-usid:1.4
 
 #        Topology
 #
@@ -22,7 +22,7 @@ topology:
   nodes:
     frr-1:
       kind: linux
-      image: bmcdougall/frr-srv6-usid:latest
+      image: bmcdougall/frr-srv6-usid:1.4
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
@@ -33,7 +33,7 @@ topology:
 
     frr-2:
       kind: linux
-      image: bmcdougall/frr-srv6-usid:latest
+      image: bmcdougall/frr-srv6-usid:1.4
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
@@ -44,7 +44,7 @@ topology:
 
     frr-3:
       kind: linux
-      image: bmcdougall/frr-srv6-usid:latest
+      image: bmcdougall/frr-srv6-usid:1.4
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
