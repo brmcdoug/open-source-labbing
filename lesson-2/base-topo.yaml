@@ -12,7 +12,7 @@
 #
 #
 
-name: lab-topo
+name: topology
 
 mgmt:
   network: frr_mgt_net
