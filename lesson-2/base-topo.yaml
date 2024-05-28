@@ -12,7 +12,7 @@
 #
 #
 
-name: 3-node
+name: lab-topo
 
 mgmt:
   network: frr_mgt_net
