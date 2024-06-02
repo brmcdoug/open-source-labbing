@@ -39,9 +39,16 @@
 
     - name: Upload new frr daemons file with bfdd enabled
       copy:
-        src: "{{ inventory_hostname }}/daemons"
+        src: "{{ inventory_hostname }}/daemons.new"
         dest: "/etc/frr/daemons"
         mode: 0644
+
+    - name: Replace daemons with daemons.new
+      command: cp /etc/frr/daemons.new /etc/frr/daemons
+      args:
+        creates: /etc/frr/daemons.bak
+      ignore_errors: yes
+      register: backup_result
 
     - name: restart frr
       command: "sudo /usr/lib/frr/frr restart"
