@@ -113,62 +113,65 @@ sudo containerlab deploy -t lesson-2-topo.yaml
 
 Example output:
 ```
-cisco@topology-host:~/open-source-labbing/lesson-2$ sudo containerlab deploy -t base-topo.yaml 
+cisco@topology-host:~/open-source-labbing/lesson-2$ sudo containerlab deploy -t lesson-2-topo.yaml 
 INFO[0000] Containerlab v0.48.6 started                 
-INFO[0000] Parsing & checking topology file: base-topo.yaml 
+INFO[0000] Parsing & checking topology file: lesson-2-topo.yaml 
 INFO[0000] Creating docker network: Name="frr_mgt_net", IPv4Subnet="172.20.1.0/24", IPv6Subnet="", MTU='ל' 
-INFO[0000] Creating lab directory: /home/cisco/open-source-labbing/lesson-2/clab-3-node 
+INFO[0000] Creating lab directory: /home/cisco/open-source-labbing/lesson-2/clab-oslab 
+INFO[0000] Creating container: "pc-2"                   
 INFO[0000] Creating container: "frr-3"                  
 INFO[0000] Creating container: "frr-1"                  
-INFO[0000] Creating container: "pc-2"                   
 INFO[0000] Creating container: "frr-2"                  
 INFO[0000] Creating container: "pc-1"                   
-INFO[0001] Creating link: frr-1:eth1 <--> frr-2:eth1    
-INFO[0001] Creating link: frr-1:eth2 <--> frr-3:eth2    
 INFO[0001] Creating link: frr-2:eth2 <--> frr-3:eth1    
-INFO[0001] Creating link: frr-1:eth3 <--> pc-1:eth1     
-INFO[0001] Creating link: frr-3:eth3 <--> pc-2:eth1     
+INFO[0001] Creating link: frr-1:eth1 <--> frr-2:eth1    
+INFO[0002] Creating link: frr-1:eth2 <--> frr-3:eth2    
+INFO[0002] Creating link: frr-3:eth3 <--> pc-2:eth1     
+INFO[0002] Creating link: frr-1:eth3 <--> pc-1:eth1     
 INFO[0002] Adding containerlab host entries to /etc/hosts file 
 INFO[0002] Adding ssh config for containerlab nodes     
-INFO[0009] Executed command "sudo /usr/lib/frr/frr start" on the node "frr-1". stdout:
+INFO[0010] Executed command "sudo /usr/lib/frr/frr start" on the node "frr-1". stdout:
 starting staticd since zebra is running[45|mgmtd] sending configuration
 [46|zebra] sending configuration
 [62|staticd] sending configuration
 Waiting for children to finish applying config...
 Exiting from the script 
-INFO[0009] Executed command "sudo service ssh start" on the node "frr-1". stdout:
+INFO[0010] Executed command "sudo service ssh start" on the node "frr-1". stdout:
  * Starting OpenBSD Secure Shell server sshd
    ...done. 
-INFO[0009] Executed command "sudo /usr/lib/frr/frr start" on the node "frr-2". stdout:
-starting staticd since zebra is running[45|mgmtd] sending configuration
-[46|zebra] sending configuration
-[62|staticd] sending configuration
+INFO[0010] Executed command "sudo /usr/lib/frr/frr start" on the node "frr-2". stdout:
+starting staticd since zebra is running[67|mgmtd] sending configuration
+[68|zebra] sending configuration
+[74|bgpd] sending configuration
+[75|isisd] sending configuration
+[84|staticd] sending configuration
 Waiting for children to finish applying config...
 Exiting from the script 
-INFO[0009] Executed command "sudo service ssh start" on the node "frr-2". stdout:
+INFO[0010] Executed command "sudo service ssh start" on the node "frr-2". stdout:
  * Starting OpenBSD Secure Shell server sshd
    ...done. 
-INFO[0009] Executed command "sudo /usr/lib/frr/frr start" on the node "frr-3". stdout:
-starting staticd since zebra is running[45|mgmtd] sending configuration
-[46|zebra] sending configuration
-[62|staticd] sending configuration
+INFO[0010] Executed command "sudo /usr/lib/frr/frr start" on the node "frr-3". stdout:
+starting staticd since zebra is running[67|mgmtd] sending configuration
+[68|zebra] sending configuration
+[74|bgpd] sending configuration
+[75|isisd] sending configuration
+[84|staticd] sending configuration
 Waiting for children to finish applying config...
 Exiting from the script 
-INFO[0009] Executed command "sudo service ssh start" on the node "frr-3". stdout:
+INFO[0010] Executed command "sudo service ssh start" on the node "frr-3". stdout:
  * Starting OpenBSD Secure Shell server sshd
    ...done. 
-INFO[0009] 🎉 New containerlab version 0.54.2 is available! Release notes: https://containerlab.dev/rn/0.54/#0542
+INFO[0010] 🎉 New containerlab version 0.54.2 is available! Release notes: https://containerlab.dev/rn/0.54/#0542
 Run 'containerlab version upgrade' to upgrade or go check other installation options at https://containerlab.dev/install/ 
-+---+-------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
-| # |       Name        | Container ID |              Image              | Kind  |  State  |  IPv4 Address   | IPv6 Address |
-+---+-------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
-| 1 | clab-3-node-frr-1 | 7fce10a6f417 | bmcdougall/frr-srv6-usid:1.4    | linux | running | 172.20.1.101/24 | N/A          |
-| 2 | clab-3-node-frr-2 | 114eb8b9893d | bmcdougall/frr-srv6-usid:1.4    | linux | running | 172.20.1.102/24 | N/A          |
-| 3 | clab-3-node-frr-3 | a326fca5186d | bmcdougall/frr-srv6-usid:1.4    | linux | running | 172.20.1.103/24 | N/A          |
-| 4 | clab-3-node-pc-1  | a5d137a52926 | praqma/network-multitool:latest | linux | running | 172.20.1.111/24 | N/A          |
-| 5 | clab-3-node-pc-2  | 34587ae2f896 | praqma/network-multitool:latest | linux | running | 172.20.1.112/24 | N/A          |
-+---+-------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
-cisco@topology-host:~/open-source-labbing/lesson-2$ 
++---+------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
+| # |       Name       | Container ID |              Image              | Kind  |  State  |  IPv4 Address   | IPv6 Address |
++---+------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
+| 1 | clab-oslab-frr-1 | b6c4a10c2e7b | bmcdougall/frr-srv6-usid:1.4    | linux | running | 172.20.1.101/24 | N/A          |
+| 2 | clab-oslab-frr-2 | f5d2562aeb62 | bmcdougall/frr-srv6-usid:1.4    | linux | running | 172.20.1.102/24 | N/A          |
+| 3 | clab-oslab-frr-3 | 24ebb8484b3e | bmcdougall/frr-srv6-usid:1.4    | linux | running | 172.20.1.103/24 | N/A          |
+| 4 | clab-oslab-pc-1  | 6712768d3834 | praqma/network-multitool:latest | linux | running | 172.20.1.111/24 | N/A          |
+| 5 | clab-oslab-pc-2  | d512975ea294 | praqma/network-multitool:latest | linux | running | 172.20.1.112/24 | N/A          |
++---+------------------+--------------+---------------------------------+-------+---------+-----------------+--------------+
 ```
 
 A couple useful commands once the topology has been deployed:
@@ -186,14 +189,18 @@ Lists the running containers on the node
 
 1. Once the topology is deployed we have options for accessing the router nodes:
 
-   1. docker exec
+   1. docker exec directory into vtysh, or into bash then invoke the FRR CLI:
 ```
-docker exec -it clab-3-node-frr-1 bash
+docker exec -it clab-oslab-frr-1 vtysh
+or
+docker exec -it clab-oslab-frr-1 bash
+then
+vtysh
 ```
 
 Output:
 ```
-cisco@topology-host:~/open-source-labbing/lesson-2$ docker exec -it clab-3-node-frr-1 bash
+cisco@topology-host:~/open-source-labbing/lesson-2$ docker exec -it clab-oslab-frr-1 bash
 frr@frr-1:/$ vtysh
 
 Hello, this is FRRouting (version 9.1-dev-my-manual-build).
@@ -202,28 +209,9 @@ Copyright 1996-2005 Kunihiro Ishiguro, et al.
 frr-1# 
 ```
 
-   2. ssh (user/pw = frr/frr123)
+   2. The other option is ssh (user/pw = frr/frr123)
 ```
-ssh frr@clab-3-node-frr-1
-```
-
-Output:
-```
-cisco@topology-host:~$ ssh frr@clab-3-node-frr-1
-Warning: Permanently added 'clab-3-node-frr-1' (ED25519) to the list of known hosts.
-frr@clab-3-node-frr-1's password: 
-Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-105-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-This system has been minimized by removing packages and content that are
-not required on a system that users do not log into.
-
-To restore this content, you can run the 'unminimize' command.
-Last login: Mon May 27 22:24:34 2024 from 172.20.1.1
-frr@frr-1:~$ 
+ssh frr@clab-oslab-frr-1 
 ```
 
 2. FRR's vty shell can be accessed from either the docker exec session or the ssh session:
@@ -263,7 +251,7 @@ For lesson-2 in this lab we've enabled both the isisd and bgpd daemons on frr-2 
 
 1. ssh to frr-1
 ```
-ssh frr@clab-lab-topo-frr-1
+ssh frr@clab-oslab-frr-1 
 pw = frr123
 ```
 
@@ -351,7 +339,7 @@ Exiting from the script
 Exiting from the script
 ```
 
-4. Re-enter vtysh and apply configs found [here](protocol-config.md)
+4. Re-enter vtysh and apply configs found [here](lesson-2-quick-config.md)
    *Note:* this particular FRR images wants you to login to vtysh with sudo in order to save configs
 
 ```
