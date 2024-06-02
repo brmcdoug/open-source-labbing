@@ -31,7 +31,7 @@
   tasks: 
       
     - name: Create a backup of the existing FRR daemons file
-      command: mv /etc/frr/daemons /etc/frr/daemons.bak
+      command: cp /etc/frr/daemons /etc/frr/daemons.bak
       args:
         creates: /etc/frr/daemons.bak
       ignore_errors: yes
