@@ -87,16 +87,16 @@ bmcdougall/frr-srv6-usid   latest    e9bfec1bb684   6 months ago    1.99GB
 
 #### Containerlab Topology YAML
 
-1. Build a Containerlab topology YAML file: [base-topo.yaml](base-topo.yaml)
+1. Build a Containerlab topology YAML file: [lesson-2-topo.yaml](lesson-2-topo.yaml)
    *Note:* the topology file includes specific parameters for starting both FRR and SSHD and for applying FRR configurations
 
-2. Define router configurations:  [base-config](base-config)
+2. Define router configurations:  [config](config)
    
    * FRR has both an frr.conf file where router interfaces and features are defined and configure, and a 'daemons' file where specific routing daemons such as OSPF may be enabled or disabled. Containerlab uses the 'binds' syntax in the base-topo.yaml to copy local files to a specific location in the FRR containers once they come up:
    ```
       binds:
-      - base-config/frr-3/daemons:/etc/frr/daemons
-      - base-config/frr-3/frr-3.conf:/etc/frr/frr.conf
+      - config/frr-3/daemons:/etc/frr/daemons
+      - config/frr-3/frr-3.conf:/etc/frr/frr.conf
    ```
 
    * The base-topo.yaml file includes a pair of lines instructing containerlab to issue a pair of commands to start both the FRR and SSHd services after the container comes up:
@@ -108,7 +108,7 @@ bmcdougall/frr-srv6-usid   latest    e9bfec1bb684   6 months ago    1.99GB
 
 3. Deploy the topology: 
 ```
-sudo containerlab deploy -t base-topo.yaml 
+sudo containerlab deploy -t lesson-2-topo.yaml 
 ```
 
 Example output:
