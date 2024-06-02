@@ -12,7 +12,7 @@
 #
 #
 
-name: base
+name: oslab
 
 mgmt:
   network: frr_mgt_net
