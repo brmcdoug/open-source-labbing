@@ -38,6 +38,7 @@ router isis 1
  is-type level-2-only
  net 49.0001.0000.0000.0001.00
 exit
+exit
 ```
 
 #### frr-2
@@ -75,6 +76,7 @@ exit
 router isis 1
  is-type level-2-only
  net 49.0001.0000.0000.0002.00
+exit
 exit
 ```
 
@@ -114,5 +116,6 @@ exit
 router isis 1
  is-type level-2-only
  net 49.0001.0000.0000.0003.00
+exit
 exit
 ```

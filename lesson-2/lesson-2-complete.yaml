@@ -27,8 +27,8 @@ topology:
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
       binds:
-        - lesson2-config/frr-1/daemons:/etc/frr/daemons
-        - lesson2-config/frr-1/frr-1.conf:/etc/frr/frr.conf
+        - lesson-2-config/frr-1/daemons:/etc/frr/daemons
+        - lesson-2-config/frr-1/frr-1.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.101
 
     frr-2:
@@ -38,8 +38,8 @@ topology:
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
       binds:
-        - lesson2-config/frr-2/daemons:/etc/frr/daemons
-        - lesson2-config/frr-2/frr-2.conf:/etc/frr/frr.conf
+        - lesson-2-config/frr-2/daemons:/etc/frr/daemons
+        - lesson-2-config/frr-2/frr-2.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.102
 
     frr-3:
@@ -49,8 +49,8 @@ topology:
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
       binds:
-        - lesson2-config/frr-3/daemons:/etc/frr/daemons
-        - lesson2-config/frr-3/frr-3.conf:/etc/frr/frr.conf
+        - lesson-2-config/frr-3/daemons:/etc/frr/daemons
+        - lesson-2-config/frr-3/frr-3.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.103
 
     pc-1:

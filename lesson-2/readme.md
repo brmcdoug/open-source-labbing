@@ -91,7 +91,20 @@ bmcdougall/frr-srv6-usid   latest    e9bfec1bb684   6 months ago    1.99GB
    *Note:* the topology file includes specific parameters for starting both FRR and SSHD and for applying FRR configurations
 
 2. Define router configurations:  [base-config](base-config)
-   Note: FRR has both an frr.conf file where router interfaces and features are defined and configure, and a 'daemons' file where specific routing daemons such as OSPF may be enabled or disabled
+   
+   * FRR has both an frr.conf file where router interfaces and features are defined and configure, and a 'daemons' file where specific routing daemons such as OSPF may be enabled or disabled. Containerlab uses the 'binds' syntax in the base-topo.yaml to copy local files to a specific location in the FRR containers once they come up:
+   ```
+      binds:
+      - base-config/frr-3/daemons:/etc/frr/daemons
+      - base-config/frr-3/frr-3.conf:/etc/frr/frr.conf
+   ```
+
+   * The base-topo.yaml file includes a pair of lines instructing containerlab to issue a pair of commands to start both the FRR and SSHd services after the container comes up:
+   ```
+      exec: 
+      - sudo /usr/lib/frr/frr start
+      - sudo service ssh start
+   ```
 
 3. Deploy the topology: 
 ```
@@ -242,6 +255,58 @@ PING 10.1.1.1 (10.1.1.1) 56(84) bytes of data.
 ```
 
 *Note:* the "client" linux nodes connected to our topology don't have IP addresses
+
+#### FRR daemons
+FRR's modular structure allows the operator to select which feature sets to turn on and off. These capabilities are found in FRR's 'daemons' file found at /etc/frr/daemons
+
+For lesson-2 in this lab we've enabled both the isisd and bgpd daemons on frr-2 and frr-3, so those two routers are ready for protocol configuration. At the same time we've left isisd and bgpd off on frr-1. In order to configure frr-1 we need to enable the two daemons and restart frr-1
+
+1. ssh to frr-1
+```
+ssh frr@clab-lab-topo-frr-1
+pw = frr123
+```
+
+2. edit the /etc/frr/daemons file and change isisd and bgpd to 'yes'
+```
+bgpd=yes
+isisd=yes
+```
+
+3. restart frr
+```
+sudo /usr/lib/frr/frr restart
+```
+
+Example output:
+```
+frr@frr-1:~$ sudo /usr/lib/frr/frr restart
+Stopping Frr monitor daemon: (watchfrr).
+Stopping Frr daemons (prio:0): (bgpd) (isisd)Stopping staticd since zebra is running (ripd) (ripngd) (ospfd) (ospf6d) (babeld) (pimd) (pim6d) (ldpd) (nhrpd) (eigrpd) (sharpd) (pbrd) (staticd) (bfdd) (fabricd) (vrrpd) (pathd).
+Stopping other frr daemons/usr/lib/frr/ssd: warning: failed to kill 52: No such process
+./usr/lib/frr/ssd: warning: failed to kill 64: No such process
+..
+Removing remaining .vty files.
+Exiting from the script
+2024/06/02 02:56:05 ZEBRA: [NNACN-54BDA][EC 4043309110] Disabling MPLS support (no kernel support)
+starting staticd since zebra is running2024/06/02 02:56:05 ISIS: [ZKB8W-3S2Q4][EC 100663330] unneeded 'destroy' callback for '/frr-isisd:isis/instance/segment-routing-srv6/msd/node-msd/max-segs-left'
+2024/06/02 02:56:05 ISIS: [ZKB8W-3S2Q4][EC 100663330] unneeded 'destroy' callback for '/frr-isisd:isis/instance/segment-routing-srv6/msd/node-msd/max-end-pop'
+2024/06/02 02:56:05 ISIS: [ZKB8W-3S2Q4][EC 100663330] unneeded 'destroy' callback for '/frr-isisd:isis/instance/segment-routing-srv6/msd/node-msd/max-h-encaps'
+2024/06/02 02:56:05 ISIS: [ZKB8W-3S2Q4][EC 100663330] unneeded 'destroy' callback for '/frr-isisd:isis/instance/segment-routing-srv6/msd/node-msd/max-end-d'
+[305|mgmtd] sending configuration
+[306|zebra] sending configuration
+[312|bgpd] sending configuration
+[313|isisd] sending configuration
+[305|mgmtd] done
+[322|staticd] sending configuration
+Waiting for children to finish applying config...
+[322|staticd] done
+[306|zebra] done
+[312|bgpd] done
+[313|isisd] done
+Exiting from the script
+Exiting from the script
+```
 
 #### Configure ISIS and BGP 
 
