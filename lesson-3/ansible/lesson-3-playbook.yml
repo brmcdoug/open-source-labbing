@@ -37,18 +37,15 @@
       ignore_errors: yes
       register: backup_result
 
-    - name: stop frr
-      command: "sudo /usr/lib/frr/frr stop"
-      ignore_errors: yes
-
-    - name: Upload new frr daemons file with bfdd enabled
-      copy:
-        src: "{{ inventory_hostname }}/daemons"
-        dest: "/etc/frr/daemons"
-        mode: 0644
+  tasks: 
+    - name: change daemons bfdd to 'yes' 
+      lineinfile:  
+        path: /etc/frr/daemons
+        regexp: ^bfdd=no
+        line: bfdd=yes
 
     - name: restart frr
-      command: "sudo /usr/lib/frr/frr start"
+      command: "sudo /usr/lib/frr/frr restart"
       ignore_errors: yes
 
     - name: deploy.log daemons status
