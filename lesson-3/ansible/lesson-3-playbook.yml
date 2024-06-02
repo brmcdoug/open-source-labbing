@@ -3,7 +3,7 @@
 # ansible-playbook -i hosts lesson-3-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
       
 - name: motd
-  hosts: all
+  hosts: frr
   become: true
   tasks:
     - name: Copy motd file to frr and pc nodes
@@ -21,7 +21,7 @@
       become: false
       lineinfile:
         path: "logs/deploy.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start containerlab deploy script"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
         create: yes
       delegate_to: localhost
       
@@ -55,10 +55,10 @@
         create: yes
       delegate_to: localhost
 
-    - name: pause for 15 seconds while frr restarts
-      pause:
-        seconds: 15
-      become: false
+    # - name: pause for 15 seconds while frr restarts
+    #   pause:
+    #     seconds: 15
+    #   become: false
 
 
 
