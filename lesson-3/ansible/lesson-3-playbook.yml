@@ -46,7 +46,7 @@
     - name: Replace daemons with daemons.new
       command: cp /etc/frr/daemons.new /etc/frr/daemons
       args:
-        creates: /etc/frr/daemons.bak
+        creates: /etc/frr/daemons
       ignore_errors: yes
       register: backup_result
 
