@@ -1,0 +1,55 @@
+---
+
+# ansible-playbook -i hosts lesson-3-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+
+- name: Start logging to local deploy.log file
+  hosts: localhost
+  become: false
+  tasks:
+      
+    - name: deploy.log start message
+      become: false
+      lineinfile:
+        path: "logs/deploy.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        create: yes
+      delegate_to: localhost
+      
+- name: Update FRR configurations
+  hosts: frr
+  become: true
+  tasks: 
+      
+    - name: Create a backup of the existing FRR daemons file
+      command: cp /etc/frr/daemons /etc/frr/daemons.bak
+      args:
+        creates: /etc/frr/daemons.bak
+      ignore_errors: yes
+      register: backup_result
+
+  tasks: 
+    - name: change daemons bfdd to 'yes' 
+      lineinfile:  
+        path: /etc/frr/daemons
+        regexp: ^bfdd=no
+        line: bfdd=yes
+
+    - name: restart frr
+      command: "sudo /usr/lib/frr/frr restart"
+      ignore_errors: yes
+
+    - name: deploy.log config files
+      become: false
+      lineinfile:
+        path: "logs/deploy.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: daemons updated and frr restarted"
+        create: yes
+      delegate_to: localhost
+
+    # - name: pause for 15 seconds while frr restarts
+    #   pause:
+    #     seconds: 15
+    #   become: false
+
+
+

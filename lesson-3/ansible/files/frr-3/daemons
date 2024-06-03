@@ -14,7 +14,7 @@ babeld=no
 sharpd=no
 staticd=no
 pbrd=no
-bfdd=yes
+bfdd=no
 fabricd=no
 
 vtysh_enable=yes
