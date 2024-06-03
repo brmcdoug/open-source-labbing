@@ -38,21 +38,33 @@
       register: backup_result
 
   tasks: 
-    - name: change daemons bfdd to 'yes' 
-      lineinfile:  
-        path: /etc/frr/daemons
-        regexp: ^bfdd=no
-        line: bfdd=yes
+    # - name: change daemons bfdd to 'yes' 
+    #   lineinfile:  
+    #     path: /etc/frr/daemons
+    #     regexp: ^bfdd=no
+    #     line: bfdd=yes
+
+    - name: Copy frr.conf file
+      copy:
+        src: "{{ inventory_hostname }}/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: Copy daemons file
+      copy:
+        src: "{{ inventory_hostname }}/daemons"
+        dest: "/etc/frr/daemons"
+        mode: 0644
 
     - name: restart frr
       command: "sudo /usr/lib/frr/frr restart"
       ignore_errors: yes
 
-    - name: deploy.log daemons status
+    - name: deploy.log config files
       become: false
       lineinfile:
         path: "logs/deploy.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: daemons file updated"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
         create: yes
       delegate_to: localhost
 
