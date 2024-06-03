@@ -12,7 +12,7 @@
         dest: "/etc/motd"
         mode: 0644 
 
-- name: Start logging to local deploy.log file
+- name: localhost
   hosts: localhost
   become: false
   tasks:
