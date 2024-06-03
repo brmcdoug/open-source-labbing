@@ -31,12 +31,12 @@
   tasks:
 
     - name: create bridge1
-      command: "sudo brctl add-br frr-2-host"
+      command: "sudo brctl addbr frr-2-host"
       register: br1
       #ignore_errors: yes
 
     - name: create bridge2
-      command: "sudo brctl add-br frr-3-host"
+      command: "sudo brctl addbr frr-3-host"
       register: br2
       #ignore_errors: yes
 
