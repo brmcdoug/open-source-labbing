@@ -26,7 +26,7 @@ topology:
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
-      binds:
+      env-files:
         - ansible/files/frr-1/daemons:/etc/frr/daemons
         - ansible/files/frr-1/frr-1.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.101
@@ -37,7 +37,7 @@ topology:
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
-      binds:
+      env-files:
         - ansible/files/frr-2/daemons:/etc/frr/daemons
         - ansible/files/frr-2/frr-2.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.102
@@ -48,7 +48,7 @@ topology:
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
-      binds:
+      env-files:
         - ansible/files/frr-3/daemons:/etc/frr/daemons
         - ansible/files/frr-3/frr-3.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.103
