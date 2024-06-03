@@ -17,9 +17,11 @@ apt-get install sshpass
 
 4. Create files for inventory, vars, configs, etc.
    
+5. Attempt to manually configure BFD, it doesn't work
+
 5. Create and run Ansible playbook(s)
    1. deploy playbook: motd, base daemons and frr.conf
-   2. update playbook: bfdd, bfd config
+   2. update playbook: bfdd, bfd config, isis p2p
    3. srv6 config
 
 
