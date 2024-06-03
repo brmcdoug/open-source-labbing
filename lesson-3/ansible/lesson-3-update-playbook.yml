@@ -55,7 +55,7 @@
 
 - name: Update pc-1 and pc-2
   hosts: localhost
-  become: true
+  become: false
   tasks: 
       
     - name: apply ip address to pc-1
