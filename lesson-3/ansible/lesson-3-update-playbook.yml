@@ -59,34 +59,34 @@
   tasks: 
       
     - name: apply ip address to pc-1
-      command: docker exec -it clab-oslab-pc-1 ip addr add 10.10.1.2/24 dev eth1
+      command: docker exec clab-oslab-pc-1 ip addr add 10.10.1.2/24 dev eth1
       ignore_errors: yes
 
     - name: apply ip route to pc-1
-      command: docker exec -it clab-oslab-pc-1 ip route add 10.0.0.0/8 via 10.10.1.1 dev eth1
+      command: docker exec clab-oslab-pc-1 ip route add 10.0.0.0/8 via 10.10.1.1 dev eth1
       ignore_errors: yes
 
     - name: ping from pc-1 to frr-1
-      command: docker exec -it clab-oslab-pc-1 ping 10.0.0.1
+      command: docker exec clab-oslab-pc-1 ping-c 2 10.0.0.1
       ignore_errors: yes
 
     - name: ping from pc-1 to frr-2
-      command: docker exec -it clab-oslab-pc-1 ping 10.0.0.2
+      command: docker exec clab-oslab-pc-1 ping -c 2 10.0.0.2
       ignore_errors: yes
 
     - name: apply ip address to pc-2
-      command: docker exec -it clab-oslab-pc-2 ip addr add 10.10.2.2/24 dev eth1
+      command: docker exec clab-oslab-pc-2 ip addr add 10.10.2.2/24 dev eth1
       ignore_errors: yes
 
     - name: apply ip route to pc-2
-      command: docker exec -it clab-oslab-pc-2 ip route add 10.0.0.0/8 via 10.10.2.1 dev eth1
+      command: docker exec clab-oslab-pc-2 ip route add 10.0.0.0/8 via 10.10.2.1 dev eth1
       ignore_errors: yes
 
     - name: ping from pc-2 to frr-3
-      command: docker exec -it clab-oslab-pc-2 ping 10.0.0.3
+      command: docker exec clab-oslab-pc-2 ping -c 2 10.0.0.3
       ignore_errors: yes
 
     - name: ping from pc-2 to frr-2
-      command: docker exec -it clab-oslab-pc-2 ping 10.0.0.2
+      command: docker exec clab-oslab-pc-2 ping -c 2 10.0.0.2
       ignore_errors: yes
 
