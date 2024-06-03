@@ -67,7 +67,7 @@
       ignore_errors: yes
 
     - name: ping from pc-1 to frr-1
-      command: docker exec clab-oslab-pc-1 ping-c 2 10.0.0.1
+      command: docker exec clab-oslab-pc-1 ping -c 2 10.0.0.1
       ignore_errors: yes
 
     - name: ping from pc-1 to frr-2

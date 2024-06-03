@@ -3,10 +3,10 @@
 
 #        Topology
 #
-#         frr-2
+#         frr-2 -- ext-bridge1 
 #         /  \
 #        /    \
-#    frr-1 --- frr-3
+#    frr-1 --- frr-3 -- ext-bridge2
 #     |         |
 #    pc-1      pc-2
 #
@@ -26,9 +26,6 @@ topology:
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
-      # binds:
-      #   - ansible/files/frr-1/daemons:/etc/frr/daemons
-      #   - ansible/files/frr-1/frr-1.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.101
 
     frr-2:
@@ -37,9 +34,6 @@ topology:
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
-      # binds:
-      #   - ansible/files/frr-2/daemons:/etc/frr/daemons
-      #   - ansible/files/frr-2/frr-2.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.102
 
     frr-3:
@@ -48,9 +42,6 @@ topology:
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
-      # binds:
-      #   - ansible/files/frr-3/daemons:/etc/frr/daemons
-      #   - ansible/files/frr-3/frr-3.conf:/etc/frr/frr.conf
       mgmt-ipv4: 172.20.1.103
 
     pc-1:
@@ -64,11 +55,19 @@ topology:
       image: praqma/network-multitool:latest
       mgmt-ipv4: 172.20.1.112
 
+    frr-2-host:
+      kind: bridge
+
+    frr-3-host:
+      kind: bridge
+
   links:
     - endpoints: ["frr-1:eth1", "frr-2:eth1"]
     - endpoints: ["frr-1:eth2", "frr-3:eth2"]
     - endpoints: ["frr-1:eth3", "pc-1:eth1"]
 
     - endpoints: ["frr-2:eth2", "frr-3:eth1"]
+    - endpoints: ["frr-2:eth3", "frr-2-host:frr-2-eth3"]
 
     - endpoints: ["frr-3:eth3", "pc-2:eth1"]
+    - endpoints: ["frr-3:eth4", "frr-3-host:frr-3-eth4"]
