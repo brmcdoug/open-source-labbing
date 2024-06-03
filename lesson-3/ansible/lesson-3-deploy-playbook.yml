@@ -31,13 +31,13 @@
   tasks: 
     - name: Copy frr.conf file
       copy:
-        src: "{{ inventory_hostname }}/frr.conf"
+        src: "{{ inventory_hostname }}/base/frr.conf"
         dest: "/etc/frr/frr.conf"
         mode: 0644
 
     - name: Copy daemons file
       copy:
-        src: "{{ inventory_hostname }}/daemons"
+        src: "{{ inventory_hostname }}/base/daemons"
         dest: "/etc/frr/daemons"
         mode: 0644
 
