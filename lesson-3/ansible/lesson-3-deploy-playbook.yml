@@ -14,7 +14,7 @@
 
 - name: localhost
   hosts: localhost
-  become: true
+  become: false
   tasks:
       
     - name: deploy.log start message
@@ -24,31 +24,6 @@
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
         create: yes
       delegate_to: localhost
-
-# - name: launch containerlab topology
-#   hosts: localhost
-#   become: true
-#   tasks:
-
-#     - name: create bridge1
-#       command: "sudo brctl addbr frr-2-host"
-#       register: br1
-#       #ignore_errors: yes
-
-#     - name: create bridge2
-#       command: "sudo brctl addbr frr-3-host"
-#       register: br2
-#       #ignore_errors: yes
-
-#     - name: launch topology
-#       command: "sudo containerlab deploy -t ../lesson-3-topo.yaml"
-#       register: clab-deploy
-#       #ignore_errors: yes
-
-#     - name: pause for 5 seconds to let containers come up
-#       pause:
-#         seconds: 5
-#       become: false
       
 - name: Update FRR configurations
   hosts: frr
