@@ -12,10 +12,10 @@
         dest: "/etc/motd"
         mode: 0644 
   tasks:
-    - name: deploy.log start message
+    - name: labbing.log start message
       become: false
       lineinfile:
-        path: "logs/deploy.log"
+        path: "logs/labbing.log"
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
         create: yes
       delegate_to: localhost
@@ -29,10 +29,10 @@
       ignore_errors: yes
 
 
-    - name: deploy.log 
+    - name: labbing.log 
       become: false
       lineinfile:
-        path: "logs/deploy.log"
+        path: "logs/labbing.log"
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: topology deployed"
         create: yes
       delegate_to: localhost

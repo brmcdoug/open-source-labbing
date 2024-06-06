@@ -17,10 +17,10 @@
   become: false
   tasks:
       
-    - name: deploy.log start message
+    - name: labbing.log start message
       become: false
       lineinfile:
-        path: "logs/deploy.log"
+        path: "logs/labbing.log"
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
         create: yes
       delegate_to: localhost
@@ -45,10 +45,10 @@
       command: "sudo /usr/lib/frr/frr restart"
       ignore_errors: yes
 
-    - name: deploy.log config files
+    - name: labbing.log config files
       become: false
       lineinfile:
-        path: "logs/deploy.log"
+        path: "logs/labbing.log"
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
         create: yes
       delegate_to: localhost
