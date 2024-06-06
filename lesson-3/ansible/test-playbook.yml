@@ -1,8 +1,18 @@
 ---
+
 - name: FRR BGP
   hosts: frr
   become: false
   tasks:
+      
+    - name: labbing.log start message
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        create: yes
+      delegate_to: localhost
+      
     - name: configure global bgp as 65000
       hosts: frr-1
       frr.frr.frr_bgp:
