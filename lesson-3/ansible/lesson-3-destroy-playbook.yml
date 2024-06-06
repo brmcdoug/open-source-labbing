@@ -14,7 +14,7 @@
         create: yes
       delegate_to: localhost
       
-- name: containerlab
+- name: destroy containerlab topology
   hosts: localhost
   become: true
   tasks:
