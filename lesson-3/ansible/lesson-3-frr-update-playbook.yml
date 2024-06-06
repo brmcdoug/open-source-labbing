@@ -33,9 +33,10 @@
         path: /etc/frr/daemons
         regexp: ^bfdd=no
         line: bfdd=yes
-      register: bfdd
-
-    - debug: var=bfdd.stdout_lines
+    - name: cat /etc/frr/daemons
+      command: cat /etc/frr/daemons | grep bfdd
+      register: out
+    - debug: var=out.stdout_lines
 
     - name: Copy update frr.conf file
       copy:
