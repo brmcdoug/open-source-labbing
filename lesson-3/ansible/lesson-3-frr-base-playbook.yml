@@ -3,7 +3,7 @@
 # ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
       
 - name: motd
-  hosts: localhost
+  hosts: frr
   become: true
   tasks:
     - name: Copy motd file to frr and pc nodes
@@ -11,7 +11,12 @@
         src: "motd"
         dest: "/etc/motd"
         mode: 0644 
+
+- name: localhost
+  hosts: localhost
+  become: false
   tasks:
+      
     - name: deploy.log start message
       become: false
       lineinfile:
@@ -20,24 +25,33 @@
         create: yes
       delegate_to: localhost
       
-- name: containerlab
-  hosts: localhost
+- name: Update FRR configurations
+  hosts: frr
   become: true
-  tasks:
-    - name: deploy topology  
-      command: "sudo containerlab deploy -t ../lesson-3-topo.yaml"
+  tasks: 
+    - name: Copy frr.conf file
+      copy:
+        src: "{{ inventory_hostname }}/base/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: Copy daemons file
+      copy:
+        src: "{{ inventory_hostname }}/base/daemons"
+        dest: "/etc/frr/daemons"
+        mode: 0644
+
+    - name: restart frr
+      command: "sudo /usr/lib/frr/frr restart"
       ignore_errors: yes
 
-
-    - name: deploy.log 
+    - name: deploy.log config files
       become: false
       lineinfile:
         path: "logs/deploy.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: topology deployed"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
         create: yes
       delegate_to: localhost
 
-- name: Run frr base config playbook
-  import_playbook: lesson-3-frr-base-playbook.yml
-  ignore_errors: yes
+
 
