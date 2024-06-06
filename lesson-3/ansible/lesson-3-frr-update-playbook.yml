@@ -27,7 +27,6 @@
       ignore_errors: yes
       register: backup_result
 
-  #tasks: 
     - name: change daemons bfdd to 'yes' 
       lineinfile:  
         path: /etc/frr/daemons
@@ -35,8 +34,9 @@
         line: bfdd=yes
 
     - name: cat /etc/frr/daemons
-      command: cat /etc/frr/daemons 
+      command: cat /etc/frr/daemons | grep bfdd
       register: out
+      ignore_errors: yes
     - debug: var=out.stdout_lines
 
     - name: Copy update frr.conf file
