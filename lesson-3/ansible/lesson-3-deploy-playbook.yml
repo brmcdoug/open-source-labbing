@@ -11,7 +11,7 @@
         src: "motd"
         dest: "/etc/motd"
         mode: 0644 
-  tasks:
+        
     - name: labbing.log start message
       become: false
       lineinfile:
