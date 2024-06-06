@@ -1,6 +1,6 @@
 ---
 
-# ansible-playbook -i hosts lesson-3-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+# ansible-playbook -i hosts lesson-3-frr-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 
 - name: Start logging to local deploy.log file
   hosts: localhost
@@ -35,7 +35,7 @@
         line: bfdd=yes
       register: bfdd
 
-    - debug: msg="{{ bfdd.stdout }}"
+    - debug: var=bfdd.stdout_lines
 
     - name: Copy update frr.conf file
       copy:
