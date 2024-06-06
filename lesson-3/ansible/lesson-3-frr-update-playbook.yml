@@ -34,7 +34,8 @@
         line: bfdd=yes
 
     - name: cat /etc/frr/daemons
-      command: cat /etc/frr/daemons | grep bfdd
+      shell:
+        cmd: cat /etc/frr/daemons | grep bfdd
       register: out
       ignore_errors: yes
     - debug: var=out.stdout_lines
