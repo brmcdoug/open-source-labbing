@@ -1,0 +1,34 @@
+---
+
+# ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+      
+- name: motd
+  hosts: localhost
+  become: true
+  tasks:
+    - name: deploy.log start message
+      become: false
+      lineinfile:
+        path: "logs/deploy.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        create: yes
+      delegate_to: localhost
+      
+- name: containerlab
+  hosts: localhost
+  become: true
+  tasks:
+    - name: deploy topology  
+      command: "sudo containerlab destroy -t ../lesson-3-topo.yaml"
+      ignore_errors: yes
+
+
+    - name: deploy.log 
+      become: false
+      lineinfile:
+        path: "logs/deploy.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: topology deployed"
+        create: yes
+      delegate_to: localhost
+
+
