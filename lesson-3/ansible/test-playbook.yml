@@ -1,4 +1,8 @@
 ---
+- name: FRR BGP
+  hosts: frr
+  become: false
+  tasks:
   - name: configure global bgp as 65000
     hosts: frr-1
     frr.frr.frr_bgp:
