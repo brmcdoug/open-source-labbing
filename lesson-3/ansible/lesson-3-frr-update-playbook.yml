@@ -27,12 +27,13 @@
       ignore_errors: yes
       register: backup_result
 
-  tasks: 
+  #tasks: 
     - name: change daemons bfdd to 'yes' 
       lineinfile:  
         path: /etc/frr/daemons
         regexp: ^bfdd=no
         line: bfdd=yes
+
     - name: cat /etc/frr/daemons
       command: cat /etc/frr/daemons | grep bfdd
       register: out
