@@ -33,6 +33,9 @@
         path: /etc/frr/daemons
         regexp: ^bfdd=no
         line: bfdd=yes
+      register: bfdd
+
+    - debug: msg="{{ bfdd.stdout }}"
 
     - name: Copy update frr.conf file
       copy:
