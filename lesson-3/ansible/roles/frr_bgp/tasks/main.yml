@@ -10,3 +10,8 @@
 - name: Configure BGP Neighbors
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
   with_items: "{{ bgp.neighbors }}"
+
+- name: Configure BGP Neighbor Update Source
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} update-source {{ item.update_source }}"
+  with_items: "{{ bgp.neighbors }}"
+  when: item.update_source is defined
