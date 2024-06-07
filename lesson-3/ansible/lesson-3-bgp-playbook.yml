@@ -30,7 +30,7 @@
             address_family:
               ipv4:
                 activate: true
-                route_reflector_client: True
+                route_reflector_client: true
 
     - name: Save FRR configuration
       ansible.builtin.command: vtysh -c 'write'
