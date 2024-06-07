@@ -12,7 +12,7 @@
         name: frr_bgp
       vars:
         bgp:
-          as: 65001
+          as: 65000
           router_id: 10.0.0.1
           #router_id: "{{ ansible_host }}"
           networks:
@@ -20,9 +20,9 @@
             - prefix: 10.1.3.0/24
           neighbors:
             - address: 10.0.0.2
-              remote_as: 65001
+              remote_as: 65000
             - address: 10.0.0.3
-              remote_as: 65001
+              remote_as: 65000
 
     - name: Save FRR configuration
       ansible.builtin.command: vtysh -c 'write'
