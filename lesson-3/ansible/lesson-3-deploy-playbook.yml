@@ -19,11 +19,14 @@
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
         create: yes
       delegate_to: localhost
-      
+
 - name: containerlab
   hosts: localhost
   become: true
   tasks:
+    - name: linux host bridge instances for pc connectivity to FRR topology
+      command: "sudo ./bridges.sh"
+
     - name: deploy topology  
       command: "sudo containerlab deploy -t ../lesson-3-topo.yaml"
       ignore_errors: yes

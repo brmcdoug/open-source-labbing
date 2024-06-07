@@ -8,13 +8,13 @@ sudo apt install ansible
 
 ```
 
-3. Install sshpass to enable Ansible to ssh into network elements
+2. Install sshpass to enable Ansible to ssh into network elements
 ```
 apt-get install sshpass
 ```
 
-4. Create Ansible files for inventory, vars, roles, configs, etc.
-5. Create playbooks
+3. Create Ansible files for inventory, vars, roles, configs, etc.
+4. Create playbooks
 
 ### Playbooks used in Lesson-3:
 
