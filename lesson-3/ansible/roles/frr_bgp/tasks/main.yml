@@ -18,5 +18,5 @@
 
 - name: Configure BGP Neighbor Address Family IPv4
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} activate"
-  with_items: "{{ bgp.neighbors }}"
+  with_items: "{{ bgp.address_family }}"
   when: item.address_family.ipv4.activate
