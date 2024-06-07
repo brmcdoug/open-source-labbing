@@ -2,7 +2,7 @@
 
 - name: FRR BGP
   hosts: frr
-  become: false
+  become: true
   tasks:
 
     - name: Collect all facts from the device
