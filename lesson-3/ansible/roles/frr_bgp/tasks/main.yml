@@ -21,6 +21,6 @@
     -c "{% if item.address_family.ipv4.route_reflector_client %} neighbor {{ item.address }} route-reflector-client{% endif %}"
   with_items: "{{ bgp.neighbors }}"
 
-- name: Configure BGP Neighbor RR client
-  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} route-reflector-client{% endif %}"
-  with_items: "{{ bgp.neighbors }}"
+# - name: Configure BGP Neighbor RR client
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} route-reflector-client{% endif %}"
+#   with_items: "{{ bgp.neighbors }}"
