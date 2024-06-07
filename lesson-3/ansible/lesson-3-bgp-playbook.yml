@@ -21,11 +21,9 @@
           neighbors:
             - address: 10.0.0.2
               remote_as: 65000
-            - address: 10.0.0.2
               update_source: lo
             - address: 10.0.0.3
               remote_as: 65000
-            - address: 10.0.0.3
               update_source: lo
 
     - name: Save FRR configuration
