@@ -26,11 +26,11 @@
               update_source: lo
           address_family:
             - afi: ipv4
-              neighbor:
-                address: 10.0.0.2
-                activate: true
-                address: 10.0.0.3
-                activate: true
+              neighbors:
+              - activate: true
+                neighbor_address: 10.0.0.2
+              - activate: true
+                neighbor_address: 10.0.0.3
 
     - name: Save FRR configuration
       ansible.builtin.command: vtysh -c 'write'
