@@ -17,20 +17,19 @@
           networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24
-          neighbors:
+           neighbors:
             - address: 10.0.0.2
               remote_as: 65000
               update_source: lo
+              address_family:
+                ipv4:
+                  activate: true
+                  route_reflector_client: true
             - address: 10.0.0.3
               remote_as: 65000
               update_source: lo
-          address_family:
-            - afi: ipv4
-              neighbors:
-                - neighbor: 10.0.0.2
-                  activate: true
-                  route_reflector_client: True
-                - neighbor: 10.0.0.3
+              address_family:
+                ipv4:
                   activate: true
 
     - name: Save FRR configuration
