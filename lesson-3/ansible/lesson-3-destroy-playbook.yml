@@ -10,6 +10,9 @@
       command: "sudo containerlab destroy -t ../lesson-3-topo.yaml"
       ignore_errors: yes
 
+    - name: delete linux host bridge instances
+      command: "sudo util/del-bridges.sh"
+
     - name: labbing.log 
       become: false
       lineinfile:
