@@ -27,10 +27,9 @@
           address_family:
             - afi: ipv4
               neighbors:
-                - activate: true
-                  address: 10.0.0.2
-                - activate: true
-                  address: 10.0.0.3
-
+                - address: 10.0.0.2
+                  activate: true
+                - address: 10.0.0.3
+                  activate: true
     - name: Save FRR configuration
       ansible.builtin.command: vtysh -c 'write'
