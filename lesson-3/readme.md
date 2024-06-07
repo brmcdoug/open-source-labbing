@@ -60,7 +60,7 @@ Prior to running the FRR update playbook we should attempt to configure BFD on o
 2. enables FRR's BFD daemon in /etc/frr/daemons on all nodes
 3. configures BFD on all nodes
 ```
-ansible-playbook -i hosts  lesson-3-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+ansible-playbook -i hosts  lesson-3-frr-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 ```
 
 ### End of Lesson-3
