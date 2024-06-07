@@ -25,7 +25,7 @@
   become: true
   tasks:
     - name: linux host bridge instances for pc connectivity to FRR topology
-      command: "sudo ./bridges.sh"
+      command: "sudo util/bridges.sh"
 
     - name: deploy topology  
       command: "sudo containerlab deploy -t ../lesson-3-topo.yaml"
