@@ -23,6 +23,9 @@ apt-get install sshpass
 #### Destroy playbook
 1. deletes linux bridge instances (if configured)
 2. destroys containerlab topology (if running)
+```
+ansible-playbook -i hosts lesson-3-destroy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+```
 
 #### Deploy playbook
 1. starts logging
@@ -30,6 +33,9 @@ apt-get install sshpass
 3. adds a message of the day to the topology host
 4. executes containerlab deploy command to bring up the topology
 5. calls the nested [frr-base-config playbook](ansible/lesson-3-frr-base-playbook.yml) 
+```
+ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+```
 
 #### FRR base playbook
 1. applies motd to FRR nodes
