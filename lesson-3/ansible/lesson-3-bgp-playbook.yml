@@ -31,14 +31,14 @@
               ipv4:
                 activate: true
 
-          address_family:
-            - afi: ipv4
-              safi: unicast
-              neighbors:
-                - neighbor: 10.0.0.2
-                  activate: yes
-                - neighbor: 10.0.0.3
-                  activate: yes
+          # address_family:
+          #   - afi: ipv4
+          #     safi: unicast
+          #     neighbors:
+          #       - neighbor: 10.0.0.2
+          #         activate: yes
+          #       - neighbor: 10.0.0.3
+          #         activate: yes
                   #route_reflector_client: True
 
     - name: Save FRR configuration
