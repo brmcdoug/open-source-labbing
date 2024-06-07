@@ -21,9 +21,15 @@
             - address: 10.0.0.2
               remote_as: 65000
               update_source: lo
+              address_family:
+                ipv4:
+                  activate: true
             - address: 10.0.0.3
               remote_as: 65000
               update_source: lo
+              address_family:
+                ipv4:
+                  activate: true
 
     - name: Save FRR configuration
       ansible.builtin.command: vtysh -c 'write'
