@@ -14,24 +14,15 @@
         bgp:
           as: 65000
           router_id: 10.0.0.1
-          #router_id: "{{ ansible_host }}"
           networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24
           neighbors:
             - address: 10.0.0.2
               remote_as: 65000
-              #update_source: lo
-            - address: 10.0.0.3
-              remote_as: 65000
-              #update_source: lo
-
-          neighbors:
-            - address: 10.0.0.2
-              #remote_as: 65000
               update_source: lo
             - address: 10.0.0.3
-              #remote_as: 65000
+              remote_as: 65000
               update_source: lo
 
     - name: Save FRR configuration
