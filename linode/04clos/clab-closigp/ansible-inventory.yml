@@ -1,0 +1,49 @@
+all:
+  vars:
+    # The generated inventory is assumed to be used from the clab host.
+    # Hence no http proxy should be used. Therefore we make sure the http
+    # module does not attempt using any global http proxy.
+    ansible_httpapi_use_proxy: false
+  children:
+    linux:
+      hosts:
+        clab-closigp-frr01:
+          ansible_host: 172.20.20.6
+        clab-closigp-frr02:
+          ansible_host: 172.20.20.3
+        clab-closigp-frr03:
+          ansible_host: 172.20.20.17
+        clab-closigp-frr04:
+          ansible_host: 172.20.20.9
+        clab-closigp-frr05:
+          ansible_host: 172.20.20.10
+        clab-closigp-frr06:
+          ansible_host: 172.20.20.5
+        clab-closigp-frr07:
+          ansible_host: 172.20.20.19
+        clab-closigp-frr08:
+          ansible_host: 172.20.20.20
+        clab-closigp-frr11:
+          ansible_host: 172.20.20.13
+        clab-closigp-frr12:
+          ansible_host: 172.20.20.2
+        clab-closigp-frr13:
+          ansible_host: 172.20.20.21
+        clab-closigp-frr14:
+          ansible_host: 172.20.20.16
+        clab-closigp-h1:
+          ansible_host: 172.20.20.12
+        clab-closigp-h2:
+          ansible_host: 172.20.20.7
+        clab-closigp-h3:
+          ansible_host: 172.20.20.15
+        clab-closigp-h4:
+          ansible_host: 172.20.20.18
+        clab-closigp-h5:
+          ansible_host: 172.20.20.8
+        clab-closigp-h6:
+          ansible_host: 172.20.20.4
+        clab-closigp-h7:
+          ansible_host: 172.20.20.14
+        clab-closigp-h8:
+          ansible_host: 172.20.20.11

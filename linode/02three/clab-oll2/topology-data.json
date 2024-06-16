@@ -1,0 +1,236 @@
+{
+  "name": "oll2",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "frr_mgt_net",
+        "bridge": "br-9f290ceae968",
+        "ipv4-subnet": "172.20.1.0/24",
+        "ipv4-gw": "172.20.1.1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "frr-1": {
+      "index": "0",
+      "shortname": "frr-1",
+      "longname": "clab-oll2-frr-1",
+      "fqdn": "frr-1.oll2.io",
+      "group": "",
+      "labdir": "/root/ol-l2/clab-oll2/frr-1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:master",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.1.101",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-9f290ceae968",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/ol-l2/clab-oll2/frr-1",
+        "clab-node-name": "frr-1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/ol-l2/stage3.yaml",
+        "containerlab": "oll2"
+      },
+      "port-bindings": [
+      ]
+    },
+    "frr-2": {
+      "index": "1",
+      "shortname": "frr-2",
+      "longname": "clab-oll2-frr-2",
+      "fqdn": "frr-2.oll2.io",
+      "group": "",
+      "labdir": "/root/ol-l2/clab-oll2/frr-2",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:master",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.1.102",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-9f290ceae968",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/ol-l2/clab-oll2/frr-2",
+        "clab-node-name": "frr-2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/ol-l2/stage3.yaml",
+        "containerlab": "oll2"
+      },
+      "port-bindings": [
+      ]
+    },
+    "frr-3": {
+      "index": "2",
+      "shortname": "frr-3",
+      "longname": "clab-oll2-frr-3",
+      "fqdn": "frr-3.oll2.io",
+      "group": "",
+      "labdir": "/root/ol-l2/clab-oll2/frr-3",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:master",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.1.103",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-9f290ceae968",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/ol-l2/clab-oll2/frr-3",
+        "clab-node-name": "frr-3",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/ol-l2/stage3.yaml",
+        "containerlab": "oll2"
+      },
+      "port-bindings": [
+      ]
+    },
+    "pc-1": {
+      "index": "3",
+      "shortname": "pc-1",
+      "longname": "clab-oll2-pc-1",
+      "fqdn": "pc-1.oll2.io",
+      "group": "",
+      "labdir": "/root/ol-l2/clab-oll2/pc-1",
+      "kind": "linux",
+      "image": "ubuntu:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.1.111",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-9f290ceae968",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/ol-l2/clab-oll2/pc-1",
+        "clab-node-name": "pc-1",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/ol-l2/stage3.yaml",
+        "containerlab": "oll2"
+      },
+      "port-bindings": [
+      ]
+    },
+    "pc-2": {
+      "index": "4",
+      "shortname": "pc-2",
+      "longname": "clab-oll2-pc-2",
+      "fqdn": "pc-2.oll2.io",
+      "group": "",
+      "labdir": "/root/ol-l2/clab-oll2/pc-2",
+      "kind": "linux",
+      "image": "ubuntu:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.1.112",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-9f290ceae968",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/root/ol-l2/clab-oll2/pc-2",
+        "clab-node-name": "pc-2",
+        "clab-node-type": "",
+        "clab-topo-file": "/root/ol-l2/stage3.yaml",
+        "containerlab": "oll2"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "frr-1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:df:7a:5a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "frr-2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:a3:72:33",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "frr-1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:06:97:25",
+        "peer": "z"
+      },
+      "z": {
+        "node": "frr-3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:02:9a:8f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "frr-1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:ea:bb:4a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "pc-1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:f0:1e:8d",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "frr-2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:59:fe:1b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "frr-3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:3d:d4:1b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "frr-3",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:74:4e:3e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "pc-2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:2b:ef:4c",
+        "peer": "a"
+      }
+    }
+  ]
+}

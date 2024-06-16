@@ -1,0 +1,164 @@
+
+name: closbgp
+
+topology:
+  nodes:
+    frr01:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr01/daemons.txt:/etc/frr/daemons
+        - frr01/bgponly.conf:/etc/frr/frr.conf
+        - frr01/vtysh.conf:/etc/frr/vtysh.conf 
+    frr02:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr02/daemons.txt:/etc/frr/daemons
+        - frr02/bgponly.conf:/etc/frr/frr.conf
+        - frr02/vtysh.conf:/etc/frr/vtysh.conf 
+    frr03:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr03/daemons.txt:/etc/frr/daemons
+        - frr03/bgponly.conf:/etc/frr/frr.conf
+        - frr03/vtysh.conf:/etc/frr/vtysh.conf 
+    frr04:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr04/daemons.txt:/etc/frr/daemons
+        - frr04/bgponly.conf:/etc/frr/frr.conf
+        - frr04/vtysh.conf:/etc/frr/vtysh.conf 
+    frr05:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr05/daemons.txt:/etc/frr/daemons
+        - frr05/bgponly.conf:/etc/frr/frr.conf
+        - frr05/vtysh.conf:/etc/frr/vtysh.conf 
+    frr06:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr06/daemons.txt:/etc/frr/daemons
+        - frr06/bgponly.conf:/etc/frr/frr.conf
+        - frr06/vtysh.conf:/etc/frr/vtysh.conf 
+    frr07:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr07/daemons.txt:/etc/frr/daemons
+        - frr07/bgponly.conf:/etc/frr/frr.conf      
+        - frr07/vtysh.conf:/etc/frr/vtysh.conf 
+    frr08:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr08/daemons.txt:/etc/frr/daemons
+        - frr08/bgponly.conf:/etc/frr/frr.conf
+        - frr08/vtysh.conf:/etc/frr/vtysh.conf 
+    frr11:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr11/daemons.txt:/etc/frr/daemons
+        - frr11/bgponly.conf:/etc/frr/frr.conf
+        - frr11/vtysh.conf:/etc/frr/vtysh.conf 
+    frr12:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr12/daemons.txt:/etc/frr/daemons
+        - frr12/bgponly.conf:/etc/frr/frr.conf
+        - frr12/vtysh.conf:/etc/frr/vtysh.conf 
+    frr13:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr13/daemons.txt:/etc/frr/daemons
+        - frr13/bgponly.conf:/etc/frr/frr.conf
+        - frr13/vtysh.conf:/etc/frr/vtysh.conf 
+    frr14:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr14/daemons.txt:/etc/frr/daemons
+        - frr14/bgponly.conf:/etc/frr/frr.conf
+        - frr14/vtysh.conf:/etc/frr/vtysh.conf 
+    h1:
+      kind: linux
+      image: ubuntu:latest
+    h2:
+      kind: linux
+      image: ubuntu:latest
+    h3:
+      kind: linux
+      image: ubuntu:latest
+    h4:
+      kind: linux
+      image: ubuntu:latest
+    h5:
+      kind: linux
+      image: ubuntu:latest
+    h6:
+      kind: linux
+      image: ubuntu:latest
+    h7:
+      kind: linux
+      image: ubuntu:latest
+    h8:
+      kind: linux
+      image: ubuntu:latest
+
+  links:
+    - endpoints: ["frr01:eth1","frr11:eth1"]
+    - endpoints: ["frr01:eth2","frr12:eth1"]
+    - endpoints: ["frr01:eth3","frr13:eth1"]
+    - endpoints: ["frr01:eth4","frr14:eth1"]
+
+    - endpoints: ["frr02:eth1","frr11:eth2"]
+    - endpoints: ["frr02:eth2","frr12:eth2"]
+    - endpoints: ["frr02:eth3","frr13:eth2"]
+    - endpoints: ["frr02:eth4","frr14:eth2"]
+    
+    - endpoints: ["frr03:eth1","frr11:eth3"]
+    - endpoints: ["frr03:eth2","frr12:eth3"]
+    - endpoints: ["frr03:eth3","frr13:eth3"]
+    - endpoints: ["frr03:eth4","frr14:eth3"]
+    
+    - endpoints: ["frr04:eth1","frr11:eth4"]
+    - endpoints: ["frr04:eth2","frr12:eth4"]
+    - endpoints: ["frr04:eth3","frr13:eth4"]
+    - endpoints: ["frr04:eth4","frr14:eth4"]
+    
+    - endpoints: ["frr05:eth1","frr11:eth5"]
+    - endpoints: ["frr05:eth2","frr12:eth5"]
+    - endpoints: ["frr05:eth3","frr13:eth5"]
+    - endpoints: ["frr05:eth4","frr14:eth5"]
+    
+    - endpoints: ["frr06:eth1","frr11:eth6"]
+    - endpoints: ["frr06:eth2","frr12:eth6"]
+    - endpoints: ["frr06:eth3","frr13:eth6"]
+    - endpoints: ["frr06:eth4","frr14:eth6"]
+    
+    - endpoints: ["frr07:eth1","frr11:eth7"]
+    - endpoints: ["frr07:eth2","frr12:eth7"]
+    - endpoints: ["frr07:eth3","frr13:eth7"]
+    - endpoints: ["frr07:eth4","frr14:eth7"]
+    
+    - endpoints: ["frr08:eth1","frr11:eth8"]
+    - endpoints: ["frr08:eth2","frr12:eth8"]
+    - endpoints: ["frr08:eth3","frr13:eth8"]
+    - endpoints: ["frr08:eth4","frr14:eth8"]
+
+    - endpoints: ["frr01:eth5","h1:eth1"]
+    - endpoints: ["frr02:eth5","h2:eth1"]
+    - endpoints: ["frr03:eth5","h3:eth1"]
+    - endpoints: ["frr04:eth5","h4:eth1"]
+    - endpoints: ["frr05:eth5","h5:eth1"]
+    - endpoints: ["frr06:eth5","h6:eth1"]
+    - endpoints: ["frr07:eth5","h7:eth1"]
+    - endpoints: ["frr08:eth5","h8:eth1"]
+
