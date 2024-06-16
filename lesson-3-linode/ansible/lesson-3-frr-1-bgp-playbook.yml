@@ -1,0 +1,35 @@
+---
+- name: Configure BGP on frr-1
+  hosts: frr-1
+  become: yes
+  tasks:
+    - name: Gather FRR facts
+      ansible.builtin.import_role:
+        name: frr_facts
+
+    - name: Configure BGP
+      ansible.builtin.import_role:
+        name: frr_bgp
+      vars:
+        bgp:
+          as: 65000
+          router_id: 10.0.0.1
+          networks:
+            - prefix: 10.0.0.1/32
+            - prefix: 10.10.1.0/24
+          neighbors:
+          - address: 10.0.0.2
+            remote_as: 65000
+            update_source: lo
+            address_family:
+              ipv4:
+                activate: true
+          - address: 10.0.0.3
+            remote_as: 65000
+            update_source: lo
+            address_family:
+              ipv4:
+                activate: true
+                
+    - name: Save FRR configuration
+      ansible.builtin.command: vtysh -c 'write'

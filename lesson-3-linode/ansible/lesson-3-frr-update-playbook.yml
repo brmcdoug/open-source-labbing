@@ -1,0 +1,98 @@
+---
+
+# ansible-playbook -i hosts lesson-3-frr-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+
+- name: Start logging to local labbing.log file
+  hosts: localhost
+  become: false
+  tasks:
+      
+    - name: labbing.log start message
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        create: yes
+      delegate_to: localhost
+      
+- name: Update FRR configurations
+  hosts: frr
+  become: true
+  tasks: 
+      
+    - name: Create a backup of the existing FRR daemons file
+      command: cp /etc/frr/daemons /etc/frr/daemons.bak
+      args:
+        creates: /etc/frr/daemons.bak
+      ignore_errors: yes
+      register: backup_result
+
+    - name: change daemons bfdd to 'yes' 
+      lineinfile:  
+        path: /etc/frr/daemons
+        regexp: ^bfdd=no
+        line: bfdd=yes
+
+    - name: cat /etc/frr/daemons
+      shell:
+        cmd: cat /etc/frr/daemons | grep bfdd
+      register: out
+      ignore_errors: yes
+    - debug: var=out.stdout_lines
+
+    - name: Copy update frr.conf file
+      copy:
+        src: "{{ inventory_hostname }}/update/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: restart frr
+      command: "sudo /usr/lib/frr/frr restart"
+      ignore_errors: yes
+
+    - name: labbing.log config files
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: daemons updated and frr restarted"
+        create: yes
+      delegate_to: localhost
+
+
+- name: Update pc-1 and pc-2
+  hosts: localhost
+  become: false
+  tasks: 
+      
+    - name: apply ip address to pc-1
+      command: docker exec clab-oslab-pc-1 ip addr add 10.10.1.2/24 dev eth1
+      ignore_errors: yes
+
+    - name: apply ip route to pc-1
+      command: docker exec clab-oslab-pc-1 ip route add 10.0.0.0/8 via 10.10.1.1 dev eth1
+      ignore_errors: yes
+
+    - name: ping from pc-1 to frr-1
+      command: docker exec clab-oslab-pc-1 ping -c 2 10.0.0.1
+      ignore_errors: yes
+
+    - name: ping from pc-1 to frr-2
+      command: docker exec clab-oslab-pc-1 ping -c 2 10.0.0.2
+      ignore_errors: yes
+
+    - name: apply ip address to pc-2
+      command: docker exec clab-oslab-pc-2 ip addr add 10.10.2.2/24 dev eth1
+      ignore_errors: yes
+
+    - name: apply ip route to pc-2
+      command: docker exec clab-oslab-pc-2 ip route add 10.0.0.0/8 via 10.10.2.1 dev eth1
+      ignore_errors: yes
+
+    - name: ping from pc-2 to frr-3
+      command: docker exec clab-oslab-pc-2 ping -c 2 10.0.0.3
+      ignore_errors: yes
+
+    - name: ping from pc-2 to frr-2
+      command: docker exec clab-oslab-pc-2 ping -c 2 10.0.0.2
+      ignore_errors: yes
+

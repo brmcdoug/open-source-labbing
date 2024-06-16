@@ -46,13 +46,13 @@ topology:
 
     pc-1:
       kind: linux
-      image: praqma/network-multitool:latest
+      image: ubuntu:latest
       mgmt-ipv4: 172.20.1.111
 
     pc-2:
 
       kind: linux
-      image: praqma/network-multitool:latest
+      image: ubuntu:latest
       mgmt-ipv4: 172.20.1.112
 
     frr-2-host:

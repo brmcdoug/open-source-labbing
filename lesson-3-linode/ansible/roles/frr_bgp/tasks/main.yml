@@ -1,0 +1,26 @@
+# roles/frr_bgp/tasks/main.yml
+---
+- name: Configure BGP Router ID
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "bgp router-id {{ bgp.router_id }}"
+
+- name: Configure BGP Networks
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "network {{ item.prefix }}"
+  with_items: "{{ bgp.networks }}"
+
+- name: Configure BGP Neighbors
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
+  with_items: "{{ bgp.neighbors }}"
+
+- name: Configure BGP Neighbor Update Source
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} update-source {{ item.update_source }}"
+  with_items: "{{ bgp.neighbors }}"
+  when: item.update_source is defined
+
+- name: Configure BGP Neighbor Address Family IPv4
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} activate" 
+    #-c "{% if item.address_family.ipv4.route_reflector_client %} neighbor {{ item.address }} route-reflector-client{% endif %}"
+  with_items: "{{ bgp.neighbors }}"
+
+# - name: Configure BGP Neighbor RR client
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} route-reflector-client{% endif %}"
+#   with_items: "{{ bgp.neighbors }}"

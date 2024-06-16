@@ -1,0 +1,9 @@
+# roles/frr_facts/tasks/main.yml
+---
+- name: Gather FRR facts
+  ansible.builtin.command: vtysh -c 'show running-config'
+  register: frr_config
+
+- name: Set FRR facts
+  ansible.builtin.set_fact:
+    frr_config: "{{ frr_config.stdout }}"

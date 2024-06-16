@@ -1,0 +1,57 @@
+---
+
+# ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+      
+- name: motd
+  hosts: frr
+  become: true
+  tasks:
+    - name: Copy motd file to frr and pc nodes
+      copy:
+        src: "motd"
+        dest: "/etc/motd"
+        mode: 0644 
+
+- name: localhost
+  hosts: localhost
+  become: false
+  tasks:
+      
+    - name: labbing.log start message
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        create: yes
+      delegate_to: localhost
+      
+- name: Update FRR configurations
+  hosts: frr
+  become: true
+  tasks: 
+    - name: Copy frr.conf file
+      copy:
+        src: "{{ inventory_hostname }}/base/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: Copy daemons file
+      copy:
+        src: "{{ inventory_hostname }}/base/daemons"
+        dest: "/etc/frr/daemons"
+        mode: 0644
+
+    - name: restart frr
+      command: "sudo /usr/lib/frr/frr restart"
+      ignore_errors: yes
+
+    - name: labbing.log config files
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
+        create: yes
+      delegate_to: localhost
+
+
+
