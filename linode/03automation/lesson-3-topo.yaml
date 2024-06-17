@@ -19,19 +19,22 @@ topology:
     frr-1:
       kind: linux
       image: quay.io/frrouting/frr:master
-      # binds:
+      binds:
+        - files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
       #   - frr-1/daemons.txt:/etc/frr/daemons
       #   - frr-1/stage3.conf:/etc/frr/frr.conf
       #   - frr-1/vtysh.conf:/etc/frr/vtysh.conf 
+
       exec: 
         #- sudo /usr/lib/frr/frr start
-        - sudo service ssh start
+        - files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
       mgmt-ipv4: 172.20.1.101
 
     frr-2:
       kind: linux
       image: quay.io/frrouting/frr:master
-      # binds:
+      binds:
+        - files/frr-2/base/start-sshd.sh:/etc/frr/start-sshd.sh
       #   - frr-2/daemons.txt:/etc/frr/daemons
       #   - frr-2/stage3.conf:/etc/frr/frr.conf
       #   - frr-2/vtysh.conf:/etc/frr/vtysh.conf 
@@ -43,7 +46,8 @@ topology:
     frr-3:
       kind: linux
       image: quay.io/frrouting/frr:master
-      # binds:
+      binds:
+        - files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
       #   - frr-3/daemons.txt:/etc/frr/daemons
       #   - frr-3/stage3.conf:/etc/frr/frr.conf
       #   - frr-3/vtysh.conf:/etc/frr/vtysh.conf 

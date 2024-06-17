@@ -24,7 +24,21 @@
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
         create: yes
       delegate_to: localhost
-      
+
+- name: enable frr sshd
+  hosts: frr
+  become: true
+  tasks:
+    - name: Copy start-sshd.sh file
+      copy:
+        src: "{{ inventory_hostname }}/base/start-sshd.sh"
+        dest: "/etc/frr/start-sshd.sh"
+        mode: 0755
+
+    - name: start sshd
+      command: "/etc/frr/start-sshd.sh &"
+      ignore_errors: yes
+
 - name: Update FRR configurations
   hosts: frr
   become: true
