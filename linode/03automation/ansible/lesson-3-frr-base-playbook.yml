@@ -29,37 +29,61 @@
   hosts: localhost
   become: false
   tasks:
-    - name: install sshd
-      command: "docker exec -it clab-oll2-frr-1 apk add --no-cache openssh "
+    - name: install sshd on frr-1
+      command: "docker exec -it clab-ansible-frr-1 apk add --no-cache openssh "
       ignore_errors: yes
 
-- name: Update FRR configurations
-  hosts: frr
-  become: true
-  tasks: 
-    - name: Copy frr.conf file
-      copy:
-        src: "{{ inventory_hostname }}/base/frr.conf"
-        dest: "/etc/frr/frr.conf"
-        mode: 0644
-
-    - name: Copy daemons file
-      copy:
-        src: "{{ inventory_hostname }}/base/daemons"
-        dest: "/etc/frr/daemons"
-        mode: 0644
-
-    - name: restart frr
-      command: "sudo /usr/lib/frr/frr restart"
+    - name: install sshd on frr-2
+      command: "docker exec -it clab-ansible-frr-2 apk add --no-cache openssh "
       ignore_errors: yes
 
-    - name: labbing.log config files
-      become: false
-      lineinfile:
-        path: "logs/labbing.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
-        create: yes
-      delegate_to: localhost
+    - name: install sshd on frr-3
+      command: "docker exec -it clab-ansible-frr-3 apk add --no-cache openssh "
+      ignore_errors: yes
+
+    - name: ssh keygen frr-1
+      command: "docker exec -it clab-ansible-frr-1 ssh-keygen -A "
+      ignore_errors: yes
+
+    - name: ssh keygen frr-2
+      command: "docker exec -it clab-ansible-frr-2 ssh-keygen -A "
+      ignore_errors: yes
+
+    - name: ssh keygen frr-3
+      command: "docker exec -it clab-ansible-frr-3 ssh-keygen -A "
+      ignore_errors: yes
+
+    - name: ssh keygen frr-1
+      command: "docker exec -it clab-ansible-frr-1 exec /usr/sbin/sshd -D -e "$@" & "
+      ignore_errors: yes
+
+# - name: Update FRR configurations
+#   hosts: frr
+#   become: true
+#   tasks: 
+#     - name: Copy frr.conf file
+#       copy:
+#         src: "{{ inventory_hostname }}/base/frr.conf"
+#         dest: "/etc/frr/frr.conf"
+#         mode: 0644
+
+#     - name: Copy daemons file
+#       copy:
+#         src: "{{ inventory_hostname }}/base/daemons"
+#         dest: "/etc/frr/daemons"
+#         mode: 0644
+
+#     - name: restart frr
+#       command: "sudo /usr/lib/frr/frr restart"
+#       ignore_errors: yes
+
+#     - name: labbing.log config files
+#       become: false
+#       lineinfile:
+#         path: "logs/labbing.log"
+#         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
+#         create: yes
+#       delegate_to: localhost
 
 
 
