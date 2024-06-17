@@ -2,12 +2,12 @@
 localhost ansible_connection=local
 
 [frr]
-frr-1 ansible_host=172.20.1.101
-frr-2 ansible_host=172.20.1.102
-frr-3 ansible_host=172.20.1.103
+frr-1 ansible_host=172.20.1.201
+frr-2 ansible_host=172.20.1.202
+frr-3 ansible_host=172.20.1.203
 
 [pc]
-pc-1 ansible_host=172.20.1.111
-pc-2 ansible_host=172.20.1.112
+pc-1 ansible_host=172.20.1.211
+pc-2 ansible_host=172.20.1.212
 
 ansible_ssh_common_args="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
