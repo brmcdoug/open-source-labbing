@@ -25,18 +25,12 @@
         create: yes
       delegate_to: localhost
 
-- name: enable frr sshd
-  hosts: frr
-  become: true
+- name: docker exec commands
+  hosts: localhost
+  become: false
   tasks:
-    - name: Copy start-sshd.sh file
-      copy:
-        src: "{{ inventory_hostname }}/base/start-sshd.sh"
-        dest: "/etc/frr/start-sshd.sh"
-        mode: 0755
-
-    - name: start sshd
-      command: "/etc/frr/start-sshd.sh &"
+    - name: install sshd
+      command: "docker exec -it clab-oll2-frr-1 apk add --no-cache openssh "
       ignore_errors: yes
 
 - name: Update FRR configurations

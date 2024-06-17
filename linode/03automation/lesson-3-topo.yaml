@@ -19,33 +19,33 @@ topology:
     frr-1:
       kind: linux
       image: quay.io/frrouting/frr:master
-      binds:
-        - ansible/files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
-      exec: 
-        - apk add --no-cache openssh
-        - /etc/frr/start-sshd.sh &
+      # binds:
+      #   - ansible/files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
+      # exec: 
+      #   - apk add --no-cache openssh
+      #   - /etc/frr/start-sshd.sh &
       mgmt-ipv4: 172.20.1.101
 
     frr-2:
       kind: linux
       image: quay.io/frrouting/frr:master
-      binds:
-        - ansible/files/frr-2/base/start-sshd.sh:/etc/frr/start-sshd.sh
-      exec: 
-        - apk add --no-cache openssh
-        - ssh-keygen -A
-        - exec /usr/sbin/sshd -D -e "$@"
+      # binds:
+      #   - ansible/files/frr-2/base/start-sshd.sh:/etc/frr/start-sshd.sh
+      # exec: 
+      #   - apk add --no-cache openssh
+      #   - ssh-keygen -A
+      #   - exec /usr/sbin/sshd -D -e "$@"
       mgmt-ipv4: 172.20.1.102
 
     frr-3:
       kind: linux
       image: quay.io/frrouting/frr:master
-      binds:
-        - ansible/files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
-      exec: 
-        - apk add --no-cache openssh
-        - ssh-keygen -A
-        - exec /usr/sbin/sshd -D -e "$@"
+      # binds:
+      #   - ansible/files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
+      # exec: 
+      #   - apk add --no-cache openssh
+      #   - ssh-keygen -A
+      #   - exec /usr/sbin/sshd -D -e "$@"
 
       mgmt-ipv4: 172.20.1.103
 
