@@ -54,7 +54,7 @@
       ignore_errors: yes
 
     - name: ssh keygen frr-1
-      command: "docker exec -it clab-ansible-frr-1 exec /usr/sbin/sshd -D -e "$@" & "
+      command: "docker exec -it clab-ansible-frr-1 exec /usr/sbin/sshd -D -e\"$@\" & "
       ignore_errors: yes
 
 # - name: Update FRR configurations
