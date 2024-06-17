@@ -20,7 +20,7 @@ topology:
       kind: linux
       image: quay.io/frrouting/frr:master
       binds:
-        - files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
+        - ansible/files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
       exec: 
         - apk add --no-cache openssh
         - /etc/frr/start-sshd.sh &
@@ -30,7 +30,7 @@ topology:
       kind: linux
       image: quay.io/frrouting/frr:master
       binds:
-        - files/frr-2/base/start-sshd.sh:/etc/frr/start-sshd.sh
+        - ansible/files/frr-2/base/start-sshd.sh:/etc/frr/start-sshd.sh
       exec: 
         - apk add --no-cache openssh
         - ssh-keygen -A
@@ -41,7 +41,7 @@ topology:
       kind: linux
       image: quay.io/frrouting/frr:master
       binds:
-        - files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
+        - ansible/files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
       exec: 
         - apk add --no-cache openssh
         - ssh-keygen -A
