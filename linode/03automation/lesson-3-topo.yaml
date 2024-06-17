@@ -40,10 +40,11 @@ topology:
     frr-3:
       kind: linux
       image: quay.io/frrouting/frr:master
-      # binds:
-      #   - ansible/files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
-      # exec: 
-      #   - apk add --no-cache openssh
+      binds:
+        - ansible/files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
+      exec: 
+        - apk add --no-cache openssh
+        - /etc/frr/start-sshd.sh &
       #   - ssh-keygen -A
       #   - exec /usr/sbin/sshd -D -e "$@"
 
