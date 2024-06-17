@@ -23,6 +23,9 @@ topology:
       #   - frr-1/daemons.txt:/etc/frr/daemons
       #   - frr-1/stage3.conf:/etc/frr/frr.conf
       #   - frr-1/vtysh.conf:/etc/frr/vtysh.conf 
+      exec: 
+        #- sudo /usr/lib/frr/frr start
+        - sudo service ssh start
       mgmt-ipv4: 172.20.1.101
 
     frr-2:
@@ -32,6 +35,9 @@ topology:
       #   - frr-2/daemons.txt:/etc/frr/daemons
       #   - frr-2/stage3.conf:/etc/frr/frr.conf
       #   - frr-2/vtysh.conf:/etc/frr/vtysh.conf 
+      exec: 
+        #- sudo /usr/lib/frr/frr start
+        - sudo service ssh start
       mgmt-ipv4: 172.20.1.102
 
     frr-3:
@@ -41,6 +47,9 @@ topology:
       #   - frr-3/daemons.txt:/etc/frr/daemons
       #   - frr-3/stage3.conf:/etc/frr/frr.conf
       #   - frr-3/vtysh.conf:/etc/frr/vtysh.conf 
+      exec: 
+        #- sudo /usr/lib/frr/frr start
+        - sudo service ssh start
       mgmt-ipv4: 172.20.1.103
 
     pc-1:
