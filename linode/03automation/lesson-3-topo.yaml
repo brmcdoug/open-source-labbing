@@ -8,7 +8,7 @@
 #    pc-1      pc-2
 #
 
-name: oll2
+name: ansible
 
 mgmt:
   network: frr_mgt_net
@@ -24,7 +24,7 @@ topology:
       # exec: 
       #   - apk add --no-cache openssh
       #   - /etc/frr/start-sshd.sh &
-      mgmt-ipv4: 172.20.1.101
+      mgmt-ipv4: 172.20.1.201
 
     frr-2:
       kind: linux
@@ -35,7 +35,7 @@ topology:
       #   - apk add --no-cache openssh
       #   - ssh-keygen -A
       #   - exec /usr/sbin/sshd -D -e "$@"
-      mgmt-ipv4: 172.20.1.102
+      mgmt-ipv4: 172.20.1.202
 
     frr-3:
       kind: linux
@@ -47,18 +47,18 @@ topology:
       #   - ssh-keygen -A
       #   - exec /usr/sbin/sshd -D -e "$@"
 
-      mgmt-ipv4: 172.20.1.103
+      mgmt-ipv4: 172.20.1.203
 
     pc-1:
       kind: linux
       image: ubuntu:latest
-      mgmt-ipv4: 172.20.1.111
+      mgmt-ipv4: 172.20.1.211
 
     pc-2:
 
       kind: linux
       image: ubuntu:latest
-      mgmt-ipv4: 172.20.1.112
+      mgmt-ipv4: 172.20.1.212
 
     frr-2-host:
       kind: bridge
