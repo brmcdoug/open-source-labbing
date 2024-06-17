@@ -21,7 +21,7 @@
       become: false
       lineinfile:
         path: "logs/labbing.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Applying base frr configs and daemons"
         create: yes
       delegate_to: localhost
       
@@ -29,21 +29,34 @@
   hosts: frr
   become: true
   tasks: 
-    - name: Copy frr.conf file
+    - name: Copy frr.conf file to frr nodes
       copy:
         src: "{{ inventory_hostname }}/base/frr.conf"
         dest: "/etc/frr/frr.conf"
         mode: 0644
 
-    - name: Copy daemons file
+    - name: Copy daemons file to frr nodes
       copy:
         src: "{{ inventory_hostname }}/base/daemons"
         dest: "/etc/frr/daemons"
         mode: 0644
 
-    - name: restart frr
+    - name: restart frr on all nodes
       command: "sudo /usr/lib/frr/frr restart"
+      register: frr_restart
+    - debug: var=frr_restart.stdout_lines
       ignore_errors: yes
+
+    - name: capture frr restart to logfile
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "
+        
+        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: FRR restart status for node {{ inventory_hostname }} {{ frr_restart.stdout }}
+        "
+        create: yes
+      delegate_to: localhost
 
     - name: labbing.log config files
       become: false

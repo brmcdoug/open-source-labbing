@@ -7,7 +7,7 @@
       ansible.builtin.import_role:
         name: frr_facts
 
-    - name: Configure BGP
+    - name: Configure BGP on frr-1
       ansible.builtin.import_role:
         name: frr_bgp
       vars:

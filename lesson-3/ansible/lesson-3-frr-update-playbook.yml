@@ -36,11 +36,22 @@
     - name: cat /etc/frr/daemons
       shell:
         cmd: cat /etc/frr/daemons | grep bfdd
-      register: out
+      register: daemons
       ignore_errors: yes
-    - debug: var=out.stdout_lines
+    - debug: var=daemons.stdout_lines
 
-    - name: Copy update frr.conf file
+    - name: Save bfdd daemon status to logfile
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "
+        
+        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: BFD daemon status for FRR node {{ inventory_hostname }} {{ daemons.stdout }}
+        "
+        create: yes
+      delegate_to: localhost
+
+    - name: Copy update frr.conf file with ISIS BFD config
       copy:
         src: "{{ inventory_hostname }}/update/frr.conf"
         dest: "/etc/frr/frr.conf"

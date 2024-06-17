@@ -16,18 +16,18 @@
       become: false
       lineinfile:
         path: "logs/labbing.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Start FRR updates"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Starting containerlab deployment"
         create: yes
       delegate_to: localhost
 
-- name: deploy containerlab topology
+- name: deploy topology
   hosts: localhost
   become: true
   tasks:
     - name: add linux host bridges for external connectivity to FRR topology
       command: "sudo util/add-bridges.sh"
 
-    - name: deploy topology  
+    - name: execute containerlab deploy   
       command: "sudo containerlab deploy -t ../lesson-3-topo.yaml"
       ignore_errors: yes
 
