@@ -23,7 +23,7 @@ topology:
         - ansible/files/frr-1/base/start-sshd.sh:/etc/frr/start-sshd.sh
       exec: 
         - apk add --no-cache openssh
-        - /etc/frr/start-sshd.sh &
+        - bash /etc/frr/start-sshd.sh &
       mgmt-ipv4: 172.20.1.201
 
     frr-2:
@@ -33,7 +33,7 @@ topology:
         - ansible/files/frr-2/base/start-sshd.sh:/etc/frr/start-sshd.sh
       exec: 
         - apk add --no-cache openssh
-        - /etc/frr/start-sshd.sh &
+        - bash /etc/frr/start-sshd.sh &
       mgmt-ipv4: 172.20.1.202
 
     frr-3:
@@ -43,7 +43,7 @@ topology:
         - ansible/files/frr-3/base/start-sshd.sh:/etc/frr/start-sshd.sh
       exec: 
         - apk add --no-cache openssh
-        - /etc/frr/start-sshd.sh &
+        - bash /etc/frr/start-sshd.sh &
 
       mgmt-ipv4: 172.20.1.203
 
