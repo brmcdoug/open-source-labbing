@@ -17,14 +17,14 @@
           as: 65000
           router_id: 10.0.0.1
 
-          networks_v4:
+          networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24
           
           networks_v6:
             - prefix: fc00:0:1::1/128
 
-          neighbors_v4:
+          neighbors:
           - address: 10.0.0.2
             remote_as: 65000
             update_source: lo
