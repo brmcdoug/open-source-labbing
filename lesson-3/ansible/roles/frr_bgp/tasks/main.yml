@@ -122,6 +122,13 @@
 - name: Configure BGP Router ID
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "bgp router-id {{ bgp.router_id }}"
 
+- name: Add global BGP no statements
+  ansible.builtin.command: >
+    vtysh -c "configure terminal"
+    -c "router bgp {{ bgp.as }}"
+    -c "no bgp ebgp-requires-policy"
+    -c "no bgp default ipv4-unicast"
+
 - name: Configure BGP IPv4 Networks
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "network {{ item.prefix }}"
   with_items: "{{ bgp.networks }}"
@@ -168,9 +175,4 @@
   with_items: "{{ bgp.neighbors_v6 }}"
   when: item.address_family.ipv6.activate is defined and item.address_family.ipv6.activate
 
-- name: Add global BGP no statements
-  ansible.builtin.command: >
-    vtysh -c "configure terminal"
-    -c "router bgp {{ bgp.as }}"
-    -c "no bgp ebgp-requires-policy"
-    -c "no bgp default ipv4-unicast"
+
