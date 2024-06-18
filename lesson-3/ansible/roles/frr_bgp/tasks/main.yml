@@ -18,7 +18,7 @@
   with_items: "{{ bgp.neighbors }}"
 
 - name: Configure BGP IPv4 Networks
-  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "network {{ item.prefix }}"
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "network {{ item.prefix }}"
   with_items: "{{ bgp.networks }}"
 
 - name: Configure BGP Neighbor Address Family IPv6
