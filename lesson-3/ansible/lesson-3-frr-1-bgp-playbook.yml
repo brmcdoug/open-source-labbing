@@ -19,6 +19,7 @@
           networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24
+          
           networks_v6:
             - prefix: fc00:0:1::1/128
 
@@ -36,6 +37,7 @@
               ipv4:
                 activate: true
 
+          neighbors_v6:
           - address: fc00:0:2::1
             remote_as: 65000
             update_source: lo

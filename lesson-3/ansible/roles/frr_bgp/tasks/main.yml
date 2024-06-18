@@ -27,11 +27,12 @@
     -c "router bgp {{ bgp.as }}"
     -c "address-family ipv6 unicast"
     -c "neighbor {{ item.address }} activate"
-  with_items: "{{ bgp.neighbors }}"
+  with_items: "{{ bgp.neighbors_v6 }}"
   when: item.address_family.ipv6.activate is defined and item.address_family.ipv6.activate
 
 - name: Configure BGP IPv6 Networks
-  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" 
+    -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
   with_items: "{{ bgp.networks_v6 }}"
 
 # - name: Configure BGP Neighbor RR client
