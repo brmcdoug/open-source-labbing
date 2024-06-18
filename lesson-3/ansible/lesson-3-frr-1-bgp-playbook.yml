@@ -16,10 +16,12 @@
         bgp:
           as: 65000
           router_id: 10.0.0.1
-          # networks:
-          #   - prefix: 10.0.0.1/32
-          #   - prefix: 10.10.1.0/24
-          #   - prefix: fc00:0:1::1/128
+          networks:
+            - prefix: 10.0.0.1/32
+            - prefix: 10.10.1.0/24
+          networks_v6:
+            - prefix: fc00:0:1::1/128
+
           neighbors:
           - address: 10.0.0.2
             remote_as: 65000
@@ -47,11 +49,6 @@
             address_family:
               ipv6:
                 activate: true
-
-          networks:
-            - prefix: 10.0.0.1/32
-            - prefix: 10.10.1.0/24
-            - prefix: fc00:0:1::1/128
                 
     - name: Save FRR configuration
       ansible.builtin.command: vtysh -c 'write'
