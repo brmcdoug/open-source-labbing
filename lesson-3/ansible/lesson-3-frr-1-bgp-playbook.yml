@@ -19,7 +19,7 @@
           networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24
-            - prefix: fc00:0:1::1/128
+            #- prefix: fc00:0:1::1/128
           neighbors:
           - address: 10.0.0.2
             remote_as: 65000
