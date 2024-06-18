@@ -16,6 +16,8 @@
         bgp:
           as: 65000
           router_id: 10.0.0.1
+          ebgp_requires_policy: false
+          default_ipv4_unicast: false
           networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24

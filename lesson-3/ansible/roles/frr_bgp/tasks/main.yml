@@ -3,6 +3,9 @@
 - name: Configure BGP Router ID
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "bgp router-id {{ bgp.router_id }}"
 
+- name: Configure BGP no defaults
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "bgp router-id {{ bgp.router_id }}"
+
 - name: Configure BGP Neighbors
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
   with_items: "{{ bgp.neighbors }}"
@@ -44,6 +47,9 @@
     -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
   with_items: "{{ bgp.networks_v6 }}"
 
-# - name: Configure BGP Neighbor RR client
-#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} route-reflector-client{% endif %}"
-#   with_items: "{{ bgp.neighbors }}"
+- name: Add global BGP no statements
+  ansible.builtin.command: >
+    vtysh -c "configure terminal"
+    -c "router bgp {{ bgp.as }}"
+    -c "no bgp ebgp-requires-policy"
+    -c "no bgp default ipv4-unicast"
