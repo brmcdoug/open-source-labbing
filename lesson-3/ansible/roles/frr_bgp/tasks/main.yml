@@ -32,7 +32,7 @@
 
 - name: Configure BGP IPv6 Networks
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
-  with_items: "{{ bgp.networks }}"
+  with_items: "{{ bgp.networks_v6 }}"
 
 # - name: Configure BGP Neighbor RR client
 #   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv4 unicast" -c "neighbor {{ item.address }} route-reflector-client{% endif %}"
