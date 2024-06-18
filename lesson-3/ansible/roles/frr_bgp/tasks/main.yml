@@ -58,6 +58,66 @@
 
 
 # roles/frr_bgp/tasks/main.yml
+
+
+# ---
+# - name: Configure BGP Router ID
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "bgp router-id {{ bgp.router_id }}"
+
+# - name: Configure BGP IPv4 Networks
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "network {{ item.prefix }}"
+#   with_items: "{{ bgp.networks }}"
+
+# - name: Configure BGP Neighbors
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
+#   with_items: "{{ bgp.neighbors }}"
+
+# - name: Configure BGP Neighbor Update Source
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} update-source {{ item.update_source }}"
+#   with_items: "{{ bgp.neighbors }}"
+#   when: item.update_source is defined
+
+# - name: Configure BGP Neighbor Address Family IPv4
+#   ansible.builtin.command: >
+#     vtysh -c "configure terminal"
+#     -c "router bgp {{ bgp.as }}"
+#     -c "address-family ipv4 unicast"
+#     -c "neighbor {{ item.address }} activate"
+#   with_items: "{{ bgp.neighbors }}"
+#   when: item.address_family.ipv4.activate is defined and item.address_family.ipv4.activate
+
+# - name: Configure BGP IPv6 Neighbors
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
+#   with_items: "{{ bgp.neighbors_v6 }}"
+
+# - name: Configure BGP IPv6 Neighbor Update Source
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} update-source {{ item.update_source }}"
+#   with_items: "{{ bgp.neighbors_v6 }}"
+#   when: item.update_source is defined
+
+# - name: Configure BGP Neighbor Address Family IPv6
+#   ansible.builtin.command: >
+#     vtysh -c "configure terminal"
+#     -c "router bgp {{ bgp.as }}"
+#     -c "address-family ipv6 unicast"
+#     -c "neighbor {{ item.address }} activate"
+#   with_items: "{{ bgp.neighbors_v6 }}"
+#   when: item.address_family.ipv6.activate is defined and item.address_family.ipv6.activate
+
+# - name: Configure BGP IPv6 Networks
+#   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" 
+#     -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
+#   with_items: "{{ bgp.networks_v6 }}"
+
+# - name: Add global BGP no statements
+#   ansible.builtin.command: >
+#     vtysh -c "configure terminal"
+#     -c "router bgp {{ bgp.as }}"
+#     -c "no bgp ebgp-requires-policy"
+#     -c "no bgp default ipv4-unicast"
+
+
+# roles/frr_bgp/tasks/main.yml
 ---
 - name: Configure BGP Router ID
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "bgp router-id {{ bgp.router_id }}"
@@ -66,14 +126,19 @@
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "network {{ item.prefix }}"
   with_items: "{{ bgp.networks }}"
 
-- name: Configure BGP Neighbors
+- name: Configure BGP IPv6 Networks
+  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
+  with_items: "{{ bgp.networks_v6 }}"
+
+- name: Configure BGP IPv4 Neighbors
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
   with_items: "{{ bgp.neighbors }}"
+  when: item.address_family.ipv4 is defined
 
-- name: Configure BGP Neighbor Update Source
+- name: Configure BGP IPv4 Neighbor Update Source
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} update-source {{ item.update_source }}"
   with_items: "{{ bgp.neighbors }}"
-  when: item.update_source is defined
+  when: item.update_source is defined and item.address_family.ipv4 is defined
 
 - name: Configure BGP Neighbor Address Family IPv4
   ansible.builtin.command: >
@@ -87,11 +152,12 @@
 - name: Configure BGP IPv6 Neighbors
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} remote-as {{ item.remote_as }}"
   with_items: "{{ bgp.neighbors_v6 }}"
+  when: item.address_family.ipv6 is defined
 
 - name: Configure BGP IPv6 Neighbor Update Source
   ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" -c "neighbor {{ item.address }} update-source {{ item.update_source }}"
   with_items: "{{ bgp.neighbors_v6 }}"
-  when: item.update_source is defined
+  when: item.update_source is defined and item.address_family.ipv6 is defined
 
 - name: Configure BGP Neighbor Address Family IPv6
   ansible.builtin.command: >
@@ -101,11 +167,6 @@
     -c "neighbor {{ item.address }} activate"
   with_items: "{{ bgp.neighbors_v6 }}"
   when: item.address_family.ipv6.activate is defined and item.address_family.ipv6.activate
-
-- name: Configure BGP IPv6 Networks
-  ansible.builtin.command: vtysh -c "configure terminal" -c "router bgp {{ bgp.as }}" 
-    -c "address-family ipv6 unicast" -c "network {{ item.prefix }}"
-  with_items: "{{ bgp.networks_v6 }}"
 
 - name: Add global BGP no statements
   ansible.builtin.command: >
