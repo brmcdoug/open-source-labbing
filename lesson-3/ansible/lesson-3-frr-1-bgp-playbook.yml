@@ -1,3 +1,5 @@
+# ansible-playbook -i hosts lesson-3-frr-1-bgp-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+
 ---
 - name: Configure BGP on frr-1
   hosts: frr-1
@@ -17,6 +19,7 @@
           networks:
             - prefix: 10.0.0.1/32
             - prefix: 10.10.1.0/24
+            - prefix: fc00:0:1::1/128
           neighbors:
           - address: 10.0.0.2
             remote_as: 65000
@@ -29,6 +32,20 @@
             update_source: lo
             address_family:
               ipv4:
+                activate: true
+
+          - address: fc00:0:2::1
+            remote_as: 65000
+            update_source: lo
+            address_family:
+              ipv6:
+                activate: true
+
+          - address: fc00:0:3::1
+            remote_as: 65000
+            update_source: lo
+            address_family:
+              ipv6:
                 activate: true
                 
     - name: Save FRR configuration
