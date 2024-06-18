@@ -1,54 +1,51 @@
 # ansible-playbook -i hosts test-bgp-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 
 ---
-- name: Configure BGP on frr-1  
+- name: configure global bgp as 65000
   hosts: frr-1
-  become: yes
-  tasks:
+  frr.frr.frr_bgp:
+    config:
+      bgp_as: 65000
+      router_id: 10.0.0.1
+      log_neighbor_changes: true
+      neighbors:
+      - neighbor: 10.0.0.2
+        remote_as: 65000
+        update_source: lo
+      - neighbor: 10.0.0.3
+        remote_as: 65000
+        update_source: lo
+      - neighbor: fc00:0:2::1
+        remote_as: 65000
+        update_source: lo
+      - neighbor: fc00:0:3::1
+        remote_as: 65000
+        update_source: lo
 
-    - name: configure global bgp as 64496
-      frr.frr.frr_bgp:
-        config:
-          bgp_as: 65000
-          router_id: 10.0.0.1
-          log_neighbor_changes: true
-          neighbors:
-          - neighbor: 10.0.0.2
-            remote_as: 65000
-            update_source: lo
-          - neighbor: 10.0.0.3
-            remote_as: 65000
-            update_source: lo
-          - neighbor: fc00:0:2::1
-            remote_as: 65000
-            update_source: lo
-          - neighbor: fc00:0:3::1
-            remote_as: 65000
-            update_source: lo
+      networks:
+      - prefix: 10.0.0.1
+        masklen: 32
+      - prefix: 10.10.1.0
+        masklen: 24
+      address_family:
+      - afi: ipv4
+        safi: unicast
 
-          networks:
-          - prefix: 10.0.0.1
-            masklen: 32
-          - prefix: 10.10.1.0
-            masklen: 24
-          address_family:
-          - afi: ipv4
-            safi: unicast
+    operation: merge
 
-        operation: merge
+- name: Configure ipv4 BGP neighbors under address family mode
+  hosts: frr-1
+  frr.frr.frr_bgp:
+    config:
+      bgp_as: 65000
+      address_family:
+      - afi: ipv4
+        safi: unicast
+        neighbors:
+        - neighbor: 10.0.0.2
+          activate: true
 
-    - name: Configure ipv4 BGP neighbors under address family mode
-      frr.frr.frr_bgp:
-        config:
-          bgp_as: 64496
-          address_family:
-          - afi: ipv4
-            safi: unicast
-            neighbors:
-            - neighbor: 10.0.0.2
-              activate: true
-
-            - neighbor: 10.0.0.3
-              activate: true
-              route_reflector_client: true
-        operation: merge
+        - neighbor: 10.0.0.3
+          activate: true
+          route_reflector_client: true
+    operation: merge
