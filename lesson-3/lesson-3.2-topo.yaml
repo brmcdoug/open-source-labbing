@@ -40,7 +40,7 @@ topology:
       kind: linux
       image: ios-xr/xrd-control-plane:24.1.1
       mgmt-ipv4: 172.20.1.206
-      startup-config: ansible/files/xrd-2/xrd-2.cfg
+      #startup-config: ansible/files/xrd-2/xrd-2.cfg
 
     frr-1-xrd-1:
       kind: bridge
