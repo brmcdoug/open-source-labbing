@@ -46,28 +46,36 @@ topology:
 
     pc-1:
       kind: linux
-      image: ubuntu:latest
+      image: alpine:latest
       mgmt-ipv4: 172.20.1.211
 
     pc-2:
 
       kind: linux
-      image: ubuntu:latest
+      image: alpine:latest
       mgmt-ipv4: 172.20.1.212
 
-    frr-2-host:
+    frr-1-xrd-1:
       kind: bridge
 
-    frr-3-host:
+    frr-2-xrd-1:
+      kind: bridge
+
+    frr-2-external:
+      kind: bridge
+
+    frr-3-external:
       kind: bridge
 
   links:
     - endpoints: ["frr-1:eth1", "frr-2:eth1"]
     - endpoints: ["frr-1:eth2", "frr-3:eth2"]
     - endpoints: ["frr-1:eth3", "pc-1:eth1"]
+    - endpoints: ["frr-1:eth4", "frr-1-xrd-1:frr-1-eth4"]
 
     - endpoints: ["frr-2:eth2", "frr-3:eth1"]
-    - endpoints: ["frr-2:eth3", "frr-2-host:frr-2-eth3"]
+    - endpoints: ["frr-2:eth3", "frr-2-external:frr-2-eth3"]
+    - endpoints: ["frr-2:eth4", "frr-2-xrd-1:frr-2-eth4"]
 
     - endpoints: ["frr-3:eth3", "pc-2:eth1"]
-    - endpoints: ["frr-3:eth4", "frr-3-host:frr-3-eth4"]
+    - endpoints: ["frr-3:eth4", "frr-3-external:frr-3-eth4"]
