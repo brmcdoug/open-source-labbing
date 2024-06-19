@@ -1,0 +1,99 @@
+---
+
+# ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+      
+- name: motd
+  hosts: frr
+  become: true
+  tasks:
+    - name: Copy motd file to frr and pc nodes
+      copy:
+        src: "motd"
+        dest: "/etc/motd"
+        mode: 0644 
+
+- name: localhost
+  hosts: localhost
+  become: false
+  tasks:
+      
+    - name: labbing.log start message
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Applying base frr configs and daemons"
+        create: yes
+      delegate_to: localhost
+
+- name: apply frr-4 config
+  hosts: frr-4
+  become: true
+  tasks: 
+    - name: Copy frr.conf file to frr-4
+      copy:
+        src: "{{ inventory_hostname }}/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: restart frr-4
+      command: "sudo /usr/lib/frr/frr restart"
+      register: frr_restart
+    - debug: var=frr_restart.stdout_lines
+      ignore_errors: yes
+
+    - name: capture frr restart to logfile
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "
+        
+        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: FRR restart status for node {{ inventory_hostname }} {{ frr_restart.stdout }}
+        "
+        create: yes
+      delegate_to: localhost
+
+    - name: labbing.log config files
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
+        create: yes
+      delegate_to: localhost
+
+- name: Update FRR configurations
+  hosts: frr
+  become: true
+  tasks: 
+    - name: Copy frr.conf file to frr nodes
+      copy:
+        src: "{{ inventory_hostname }}/xternal/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: restart frr on nodes 1-3
+      command: "sudo /usr/lib/frr/frr restart"
+      register: frr_restart
+    - debug: var=frr_restart.stdout_lines
+      ignore_errors: yes
+
+    - name: capture frr restart to logfile
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "
+        
+        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: FRR restart status for node {{ inventory_hostname }} {{ frr_restart.stdout }}
+        "
+        create: yes
+      delegate_to: localhost
+
+    - name: labbing.log config files
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
+        create: yes
+      delegate_to: localhost
+
+
+
