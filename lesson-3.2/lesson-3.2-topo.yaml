@@ -11,7 +11,7 @@
 #
 #
 
-name: ansible
+name: ext
 
 mgmt:
   network: frr_mgt_net
