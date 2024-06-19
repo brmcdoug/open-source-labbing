@@ -1,29 +1,6 @@
 ---
 
 # ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
-      
-- name: motd
-  hosts: frr
-  become: true
-  tasks:
-    - name: Copy motd file to frr and pc nodes
-      copy:
-        src: "motd"
-        dest: "/etc/motd"
-        mode: 0644 
-
-- name: localhost
-  hosts: localhost
-  become: false
-  tasks:
-      
-    - name: labbing.log start message
-      become: false
-      lineinfile:
-        path: "logs/labbing.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: Applying base frr configs and daemons"
-        create: yes
-      delegate_to: localhost
 
 - name: apply frr-4 config
   hosts: frr-4
@@ -60,7 +37,7 @@
         create: yes
       delegate_to: localhost
 
-- name: Update FRR configurations
+- name: Update frr-1 thru frr-3 configurations
   hosts: frr
   become: true
   tasks: 
