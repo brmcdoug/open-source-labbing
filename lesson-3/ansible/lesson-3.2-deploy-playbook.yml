@@ -23,6 +23,7 @@
   tasks:
     - name: add linux host bridges for external connectivity to FRR topology
       command: "sudo util/update-bridges.sh"
+      ignore_errors: yes
 
     - name: execute containerlab deploy   
       command: "sudo containerlab deploy -t ../lesson-3.2-topo.yaml"
