@@ -36,7 +36,7 @@ topology:
       mgmt-ipv4: 172.20.1.205
       startup-config: ansible/files/xrd-1/xrd-1.cfg
 
-    xrd-2-ext:
+    xrd-2:
       kind: linux
       image: ios-xr/xrd-control-plane:24.1.1
       mgmt-ipv4: 172.20.1.206
