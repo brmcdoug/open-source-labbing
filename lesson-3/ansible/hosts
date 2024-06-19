@@ -6,6 +6,9 @@ frr-1 ansible_host=172.20.1.201
 frr-2 ansible_host=172.20.1.202
 frr-3 ansible_host=172.20.1.203
 
+[frr-4]
+frr-4 ansible_host=172.20.1.204
+
 [pc]
 pc-1 ansible_host=172.20.1.211
 pc-2 ansible_host=172.20.1.212

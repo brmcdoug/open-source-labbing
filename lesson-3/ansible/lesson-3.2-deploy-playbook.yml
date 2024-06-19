@@ -1,6 +1,6 @@
 ---
 
-# ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+# ansible-playbook -i hosts lesson-3.2-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
       
 - name: logging
   hosts: localhost
@@ -33,7 +33,7 @@
         create: yes
       delegate_to: localhost
 
-- name: Run frr base config playbook
-  import_playbook: lesson-3.2-frr-update-playbook.yml
+- name: Run 3.2 base config playbook
+  import_playbook: lesson-3.2-update-playbook.yml
   ignore_errors: yes
 

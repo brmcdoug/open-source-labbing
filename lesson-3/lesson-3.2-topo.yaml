@@ -22,9 +22,9 @@ topology:
     frr-4:
       kind: linux
       image: bmcdougall/frr-srv6-usid:1.4
-      binds:
-        - config/frr-4/daemons:/etc/frr/daemons
-        - config/frr-4/frr-4.conf:/etc/frr/frr.conf
+      # binds:
+      #   - config/frr-4/daemons:/etc/frr/daemons
+      #   - config/frr-4/frr-4.conf:/etc/frr/frr.conf
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
