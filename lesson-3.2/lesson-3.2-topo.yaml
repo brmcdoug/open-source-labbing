@@ -1,0 +1,64 @@
+### Lesson 3.2 Topology bolts the two external nodes onto frr-2 and frr-3, and attaches xrd-1 to the internal network via frr-1 and frr-2
+#
+#        Topology
+#
+#  xrd-1  -- frr-2 -- ext-br -- frr-4-ext
+#     \     /  \                      |
+#      \   /    \                     |
+#      frr-1 --- frr-3 -- ext-br -- xrd-2-ext
+#       |         |
+#      pc-1      pc-2
+#
+#
+
+name: ansible
+
+mgmt:
+  network: frr_mgt_net
+  ipv4-subnet: 172.20.1.0/24
+
+topology:
+  nodes:
+    frr-4-ext:
+      kind: linux
+      image: bmcdougall/frr-srv6-usid:1.4
+      binds:
+        - config/frr-4/daemons:/etc/frr/daemons
+        - config/frr-4/frr-4.conf:/etc/frr/frr.conf
+      exec: 
+        - sudo /usr/lib/frr/frr start
+        - sudo service ssh start
+      mgmt-ipv4: 172.20.1.204
+
+    xrd-1:
+      kind: linux
+      image: ios-xr/xrd-control-plane:24.1.1
+      mgmt-ipv4: 172.20.1.205
+      startup-config: config/xrd-1.cfg
+
+    xrd-2-ext:
+      kind: linux
+      image: ios-xr/xrd-control-plane:24.1.1
+      mgmt-ipv4: 172.20.1.206
+      startup-config: config/xrd-2-ext.cfg
+
+    frr-1-xrd-1:
+      kind: bridge
+
+    frr-2-xrd-1:
+      kind: bridge
+
+    frr-2-external:
+      kind: bridge
+
+    frr-3-external:
+      kind: bridge
+
+  links:
+    - endpoints: ["frr-4:eth1", "frr-2-external:frr-4-eth1"]
+    - endpoints: ["frr-4:eth2", "xrd-2-ext:Gi0-0-0-1"]
+
+    - endpoints: ["xrd-2-ext:Gi0-0-0-0", "frr-3-external:xrd-2-ext-Gi0-0-0-0"]
+
+    - endpoints: ["xrd-1:Gi0-0-0-0", "frr-1-xrd-1:xrd-1-Gi0-0-0-0"]
+    - endpoints: ["xrd-1:Gi0-0-0-1", "frr-2-xrd-1:xrd-1-Gi0-0-0-1"]
