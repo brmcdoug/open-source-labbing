@@ -19,7 +19,7 @@ mgmt:
 
 topology:
   nodes:
-    frr-4-ext:
+    frr-4:
       kind: linux
       image: bmcdougall/frr-srv6-usid:1.4
       binds:
