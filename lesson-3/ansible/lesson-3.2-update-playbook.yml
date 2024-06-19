@@ -6,6 +6,11 @@
   hosts: frr-4
   become: true
   tasks: 
+
+    - name: set eth2 mtu for ISIS
+      command: "sudo ip link set eth2 mtu 1500"
+      ignore_errors: yes
+
     - name: Copy frr.conf file to frr-4
       copy:
         src: "{{ inventory_hostname }}/frr.conf"
@@ -36,6 +41,22 @@
         line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files loaded and frr restarted"
         create: yes
       delegate_to: localhost
+
+- name: set ISIS interface MTU on frr-1
+  hosts: frr-1
+  become: true
+  tasks: 
+    - name: set eth4 mtu for ISIS
+      command: "sudo ip link set eth4 mtu 1500"
+      ignore_errors: yes
+
+- name: set ISIS interface MTU on frr-2
+  hosts: frr-2
+  become: true
+  tasks: 
+    - name: set eth4 mtu for ISIS
+      command: "sudo ip link set eth4 mtu 1500"
+      ignore_errors: yes
 
 - name: Update frr-1 thru frr-3 configurations
   hosts: frr

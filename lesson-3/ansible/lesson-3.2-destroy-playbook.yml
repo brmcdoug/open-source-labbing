@@ -1,0 +1,24 @@
+---
+
+# ansible-playbook -i hosts lesson-3-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
+
+- name: destroy containerlab topology
+  hosts: localhost
+  become: true
+  tasks:
+    - name: destroy topology  
+      command: "sudo containerlab destroy -t ../lesson-3.2-topo.yaml"
+      ignore_errors: yes
+
+    - name: delete linux host bridge instances
+      command: "sudo util/del-bridges.sh"
+
+    - name: labbing.log 
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: topology destroyed"
+        create: yes
+      delegate_to: localhost
+
+
