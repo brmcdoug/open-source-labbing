@@ -1,6 +1,6 @@
 ---
 
-# ansible-playbook -i hosts lesson-3-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
+# ansible-playbook -i hosts lesson-3.2-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
 
 - name: destroy containerlab topology
   hosts: localhost
@@ -12,6 +12,7 @@
 
     - name: delete linux host bridge instances
       command: "sudo util/del-bridges.sh"
+      ignore_errors: yes
 
     - name: labbing.log 
       become: false

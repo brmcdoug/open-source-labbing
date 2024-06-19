@@ -12,6 +12,7 @@
 
     - name: delete linux host bridge instances
       command: "sudo util/del-bridges.sh"
+      ignore_errors: yes
 
     - name: labbing.log 
       become: false
