@@ -52,7 +52,7 @@ topology:
     xrd02-host:
       kind: bridge
 
-    frr-2-external:
+    frr-4-host:
       kind: bridge
 
   links:
@@ -62,5 +62,5 @@ topology:
     - endpoints: ["xrd02:Gi0-0-0-0", "xrd02-host:xrd02-Gi0-0-0-0"]
     - endpoints: ["xrd02:Gi0-0-0-1", "frr-4:eth2"]
 
-    - endpoints: ["frr-4:eth1", "frr-2-external:frr-4-eth1"]
+    - endpoints: ["frr-4:eth1", "frr-4-host:frr-4-eth1"]
 
