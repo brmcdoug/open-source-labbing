@@ -1,0 +1,20 @@
+04bf
+clab deploy -t fullrouting.yaml
+
+----
+no host configurations
+
+uses eBGP over IS-IS
+eBGP is loopback to loopback
+makes the BGP configuration more complex
+makes the router configurations more consistent
+----
+
+docker exec -it clab-bfrt-frr01 vtysh
+sho bgp ipv6
+
+takes a few seconds to converge!
+
+should see all the 4’s
+
+clab destroy -t fullrouting.yaml

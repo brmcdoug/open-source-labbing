@@ -1,0 +1,491 @@
+
+name: bfrt
+
+topology:
+  nodes:
+
+    #pod 0
+    frr001:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr001/daemons.txt:/etc/frr/daemons
+        - frr001/routing.conf:/etc/frr/frr.conf
+        - frr001/vtysh.conf:/etc/frr/vtysh.conf 
+    frr002:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr002/daemons.txt:/etc/frr/daemons
+        - frr002/routing.conf:/etc/frr/frr.conf
+        - frr002/vtysh.conf:/etc/frr/vtysh.conf 
+    frr003:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr003/daemons.txt:/etc/frr/daemons
+        - frr003/routing.conf:/etc/frr/frr.conf
+        - frr003/vtysh.conf:/etc/frr/vtysh.conf 
+    frr004:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr004/daemons.txt:/etc/frr/daemons
+        - frr004/routing.conf:/etc/frr/frr.conf
+        - frr004/vtysh.conf:/etc/frr/vtysh.conf 
+
+    frr101:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr101/daemons.txt:/etc/frr/daemons
+        - frr101/routing.conf:/etc/frr/frr.conf
+        - frr101/vtysh.conf:/etc/frr/vtysh.conf 
+    frr102:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr102/daemons.txt:/etc/frr/daemons
+        - frr102/routing.conf:/etc/frr/frr.conf
+        - frr102/vtysh.conf:/etc/frr/vtysh.conf 
+    frr103:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr103/daemons.txt:/etc/frr/daemons
+        - frr103/routing.conf:/etc/frr/frr.conf
+        - frr103/vtysh.conf:/etc/frr/vtysh.conf 
+    frr104:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr104/daemons.txt:/etc/frr/daemons
+        - frr104/routing.conf:/etc/frr/frr.conf
+        - frr104/vtysh.conf:/etc/frr/vtysh.conf 
+
+    #pod 1
+    frr011:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr011/daemons.txt:/etc/frr/daemons
+        - frr011/routing.conf:/etc/frr/frr.conf
+        - frr011/vtysh.conf:/etc/frr/vtysh.conf 
+    frr012:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr012/daemons.txt:/etc/frr/daemons
+        - frr012/routing.conf:/etc/frr/frr.conf
+        - frr012/vtysh.conf:/etc/frr/vtysh.conf 
+    frr013:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr013/daemons.txt:/etc/frr/daemons
+        - frr013/routing.conf:/etc/frr/frr.conf
+        - frr013/vtysh.conf:/etc/frr/vtysh.conf 
+    frr014:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr014/daemons.txt:/etc/frr/daemons
+        - frr014/routing.conf:/etc/frr/frr.conf
+        - frr014/vtysh.conf:/etc/frr/vtysh.conf 
+
+    frr111:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr111/daemons.txt:/etc/frr/daemons
+        - frr111/routing.conf:/etc/frr/frr.conf
+        - frr111/vtysh.conf:/etc/frr/vtysh.conf 
+    frr112:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr112/daemons.txt:/etc/frr/daemons
+        - frr112/routing.conf:/etc/frr/frr.conf
+        - frr112/vtysh.conf:/etc/frr/vtysh.conf 
+    frr113:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr113/daemons.txt:/etc/frr/daemons
+        - frr113/routing.conf:/etc/frr/frr.conf
+        - frr113/vtysh.conf:/etc/frr/vtysh.conf 
+    frr114:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr114/daemons.txt:/etc/frr/daemons
+        - frr114/routing.conf:/etc/frr/frr.conf
+        - frr114/vtysh.conf:/etc/frr/vtysh.conf 
+
+      #pod 2
+    frr021:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr021/daemons.txt:/etc/frr/daemons
+        - frr021/routing.conf:/etc/frr/frr.conf
+        - frr021/vtysh.conf:/etc/frr/vtysh.conf 
+    frr022:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr022/daemons.txt:/etc/frr/daemons
+        - frr022/routing.conf:/etc/frr/frr.conf
+        - frr022/vtysh.conf:/etc/frr/vtysh.conf 
+    frr023:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr023/daemons.txt:/etc/frr/daemons
+        - frr023/routing.conf:/etc/frr/frr.conf
+        - frr023/vtysh.conf:/etc/frr/vtysh.conf 
+    frr024:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr024/daemons.txt:/etc/frr/daemons
+        - frr024/routing.conf:/etc/frr/frr.conf
+        - frr024/vtysh.conf:/etc/frr/vtysh.conf 
+
+    frr121:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr121/daemons.txt:/etc/frr/daemons
+        - frr121/routing.conf:/etc/frr/frr.conf
+        - frr121/vtysh.conf:/etc/frr/vtysh.conf 
+    frr122:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr122/daemons.txt:/etc/frr/daemons
+        - frr122/routing.conf:/etc/frr/frr.conf
+        - frr122/vtysh.conf:/etc/frr/vtysh.conf 
+    frr123:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr123/daemons.txt:/etc/frr/daemons
+        - frr123/routing.conf:/etc/frr/frr.conf
+        - frr123/vtysh.conf:/etc/frr/vtysh.conf 
+    frr124:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr124/daemons.txt:/etc/frr/daemons
+        - frr124/routing.conf:/etc/frr/frr.conf
+        - frr124/vtysh.conf:/etc/frr/vtysh.conf 
+  
+    #pod 3
+    frr031:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr031/daemons.txt:/etc/frr/daemons
+        - frr031/routing.conf:/etc/frr/frr.conf
+        - frr031/vtysh.conf:/etc/frr/vtysh.conf 
+    frr032:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr032/daemons.txt:/etc/frr/daemons
+        - frr032/routing.conf:/etc/frr/frr.conf
+        - frr032/vtysh.conf:/etc/frr/vtysh.conf 
+    frr033:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr033/daemons.txt:/etc/frr/daemons
+        - frr033/routing.conf:/etc/frr/frr.conf
+        - frr033/vtysh.conf:/etc/frr/vtysh.conf 
+    frr034:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr034/daemons.txt:/etc/frr/daemons
+        - frr034/routing.conf:/etc/frr/frr.conf
+        - frr034/vtysh.conf:/etc/frr/vtysh.conf 
+
+    frr131:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr131/daemons.txt:/etc/frr/daemons
+        - frr131/routing.conf:/etc/frr/frr.conf
+        - frr131/vtysh.conf:/etc/frr/vtysh.conf 
+    frr132:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr132/daemons.txt:/etc/frr/daemons
+        - frr132/routing.conf:/etc/frr/frr.conf
+        - frr132/vtysh.conf:/etc/frr/vtysh.conf 
+    frr133:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr133/daemons.txt:/etc/frr/daemons
+        - frr133/routing.conf:/etc/frr/frr.conf
+        - frr133/vtysh.conf:/etc/frr/vtysh.conf 
+    frr134:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr134/daemons.txt:/etc/frr/daemons
+        - frr134/routing.conf:/etc/frr/frr.conf
+        - frr134/vtysh.conf:/etc/frr/vtysh.conf 
+
+    #plane 0
+    frr201:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr201/daemons.txt:/etc/frr/daemons
+        - frr201/routing.conf:/etc/frr/frr.conf
+        - frr201/vtysh.conf:/etc/frr/vtysh.conf 
+    frr202:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr202/daemons.txt:/etc/frr/daemons
+        - frr202/routing.conf:/etc/frr/frr.conf
+        - frr202/vtysh.conf:/etc/frr/vtysh.conf 
+
+    #plane 1
+    frr211:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr211/daemons.txt:/etc/frr/daemons
+        - frr211/routing.conf:/etc/frr/frr.conf
+        - frr211/vtysh.conf:/etc/frr/vtysh.conf 
+    frr212:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr212/daemons.txt:/etc/frr/daemons
+        - frr212/routing.conf:/etc/frr/frr.conf
+        - frr212/vtysh.conf:/etc/frr/vtysh.conf 
+
+    #plane 2
+    frr221:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr221/daemons.txt:/etc/frr/daemons
+        - frr221/routing.conf:/etc/frr/frr.conf
+        - frr221/vtysh.conf:/etc/frr/vtysh.conf 
+    frr222:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr222/daemons.txt:/etc/frr/daemons
+        - frr222/routing.conf:/etc/frr/frr.conf
+        - frr222/vtysh.conf:/etc/frr/vtysh.conf 
+
+    #plane 3
+    frr231:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr231/daemons.txt:/etc/frr/daemons
+        - frr231/routing.conf:/etc/frr/frr.conf
+        - frr231/vtysh.conf:/etc/frr/vtysh.conf 
+    frr232:
+      kind: linux
+      image: quay.io/frrouting/frr:master
+      binds:
+        - frr232/daemons.txt:/etc/frr/daemons
+        - frr232/routing.conf:/etc/frr/frr.conf
+        - frr232/vtysh.conf:/etc/frr/vtysh.conf 
+
+    #hosts
+    h01:
+      kind: linux
+      image: ubuntu:latest
+    h02:
+      kind: linux
+      image: ubuntu:latest
+    h03:
+      kind: linux
+      image: ubuntu:latest
+    h04:
+      kind: linux
+      image: ubuntu:latest
+    h11:
+      kind: linux
+      image: ubuntu:latest
+    h12:
+      kind: linux
+      image: ubuntu:latest
+    h13:
+      kind: linux
+      image: ubuntu:latest
+    h14:
+      kind: linux
+      image: ubuntu:latest
+    h21:
+      kind: linux
+      image: ubuntu:latest
+    h22:
+      kind: linux
+      image: ubuntu:latest
+    h23:
+      kind: linux
+      image: ubuntu:latest
+    h24:
+      kind: linux
+      image: ubuntu:latest
+    h31:
+      kind: linux
+      image: ubuntu:latest
+    h32:
+      kind: linux
+      image: ubuntu:latest
+    h33:
+      kind: linux
+      image: ubuntu:latest
+    h34:
+      kind: linux
+      image: ubuntu:latest
+
+  links:
+
+    #pod 0
+    - endpoints: ["frr001:eth1","frr101:eth1"]
+    - endpoints: ["frr001:eth2","frr102:eth1"]
+    - endpoints: ["frr001:eth3","frr103:eth1"]
+    - endpoints: ["frr001:eth4","frr104:eth1"]
+    - endpoints: ["frr002:eth1","frr101:eth2"]
+    - endpoints: ["frr002:eth2","frr102:eth2"]
+    - endpoints: ["frr002:eth3","frr103:eth2"]
+    - endpoints: ["frr002:eth4","frr104:eth2"]
+    - endpoints: ["frr003:eth1","frr101:eth3"]
+    - endpoints: ["frr003:eth2","frr102:eth3"]
+    - endpoints: ["frr003:eth3","frr103:eth3"]
+    - endpoints: ["frr003:eth4","frr104:eth3"]
+    - endpoints: ["frr004:eth1","frr101:eth4"]
+    - endpoints: ["frr004:eth2","frr102:eth4"]
+    - endpoints: ["frr004:eth3","frr103:eth4"]
+    - endpoints: ["frr004:eth4","frr104:eth4"]
+
+    #pod 1
+    - endpoints: ["frr011:eth1","frr111:eth1"]
+    - endpoints: ["frr011:eth2","frr112:eth1"]
+    - endpoints: ["frr011:eth3","frr113:eth1"]
+    - endpoints: ["frr011:eth4","frr114:eth1"]
+    - endpoints: ["frr012:eth1","frr111:eth2"]
+    - endpoints: ["frr012:eth2","frr112:eth2"]
+    - endpoints: ["frr012:eth3","frr113:eth2"]
+    - endpoints: ["frr012:eth4","frr114:eth2"]
+    - endpoints: ["frr013:eth1","frr111:eth3"]
+    - endpoints: ["frr013:eth2","frr112:eth3"]
+    - endpoints: ["frr013:eth3","frr113:eth3"]
+    - endpoints: ["frr013:eth4","frr114:eth3"]
+    - endpoints: ["frr014:eth1","frr111:eth4"]
+    - endpoints: ["frr014:eth2","frr112:eth4"]
+    - endpoints: ["frr014:eth3","frr113:eth4"]
+    - endpoints: ["frr014:eth4","frr114:eth4"]
+
+    #pod 2
+    - endpoints: ["frr021:eth1","frr121:eth1"]
+    - endpoints: ["frr021:eth2","frr122:eth1"]
+    - endpoints: ["frr021:eth3","frr123:eth1"]
+    - endpoints: ["frr021:eth4","frr124:eth1"]
+    - endpoints: ["frr022:eth1","frr121:eth2"]
+    - endpoints: ["frr022:eth2","frr122:eth2"]
+    - endpoints: ["frr022:eth3","frr123:eth2"]
+    - endpoints: ["frr022:eth4","frr124:eth2"]
+    - endpoints: ["frr023:eth1","frr121:eth3"]
+    - endpoints: ["frr023:eth2","frr122:eth3"]
+    - endpoints: ["frr023:eth3","frr123:eth3"]
+    - endpoints: ["frr023:eth4","frr124:eth3"]
+    - endpoints: ["frr024:eth1","frr121:eth4"]
+    - endpoints: ["frr024:eth2","frr122:eth4"]
+    - endpoints: ["frr024:eth3","frr123:eth4"]
+    - endpoints: ["frr024:eth4","frr124:eth4"]
+
+    #pod 3
+    - endpoints: ["frr031:eth1","frr131:eth1"]
+    - endpoints: ["frr031:eth2","frr132:eth1"]
+    - endpoints: ["frr031:eth3","frr133:eth1"]
+    - endpoints: ["frr031:eth4","frr134:eth1"]
+    - endpoints: ["frr032:eth1","frr131:eth2"]
+    - endpoints: ["frr032:eth2","frr132:eth2"]
+    - endpoints: ["frr032:eth3","frr133:eth2"]
+    - endpoints: ["frr032:eth4","frr134:eth2"]
+    - endpoints: ["frr033:eth1","frr131:eth3"]
+    - endpoints: ["frr033:eth2","frr132:eth3"]
+    - endpoints: ["frr033:eth3","frr133:eth3"]
+    - endpoints: ["frr033:eth4","frr134:eth3"]
+    - endpoints: ["frr034:eth1","frr131:eth4"]
+    - endpoints: ["frr034:eth2","frr132:eth4"]
+    - endpoints: ["frr034:eth3","frr133:eth4"]
+    - endpoints: ["frr034:eth4","frr134:eth4"]
+
+    #plane 0
+    - endpoints: ["frr201:eth1","frr101:eth5"]
+    - endpoints: ["frr201:eth2","frr111:eth5"]
+    - endpoints: ["frr201:eth3","frr121:eth5"]
+    - endpoints: ["frr201:eth4","frr131:eth5"]
+    - endpoints: ["frr202:eth1","frr101:eth6"]
+    - endpoints: ["frr202:eth2","frr111:eth6"]
+    - endpoints: ["frr202:eth3","frr121:eth6"]
+    - endpoints: ["frr202:eth4","frr131:eth6"]
+
+    #plane 1
+    - endpoints: ["frr211:eth1","frr102:eth5"]
+    - endpoints: ["frr211:eth2","frr112:eth5"]
+    - endpoints: ["frr211:eth3","frr122:eth5"]
+    - endpoints: ["frr211:eth4","frr132:eth5"]
+    - endpoints: ["frr212:eth1","frr102:eth6"]
+    - endpoints: ["frr212:eth2","frr112:eth6"]
+    - endpoints: ["frr212:eth3","frr122:eth6"]
+    - endpoints: ["frr212:eth4","frr132:eth6"]
+
+    #plane 2
+    - endpoints: ["frr221:eth1","frr103:eth5"]
+    - endpoints: ["frr221:eth2","frr113:eth5"]
+    - endpoints: ["frr221:eth3","frr123:eth5"]
+    - endpoints: ["frr221:eth4","frr133:eth5"]
+    - endpoints: ["frr222:eth1","frr103:eth6"]
+    - endpoints: ["frr222:eth2","frr113:eth6"]
+    - endpoints: ["frr222:eth3","frr123:eth6"]
+    - endpoints: ["frr222:eth4","frr133:eth6"]
+
+    #plane 3
+    - endpoints: ["frr231:eth1","frr104:eth5"]
+    - endpoints: ["frr231:eth2","frr114:eth5"]
+    - endpoints: ["frr231:eth3","frr124:eth5"]
+    - endpoints: ["frr231:eth4","frr134:eth5"]
+    - endpoints: ["frr232:eth1","frr104:eth6"]
+    - endpoints: ["frr232:eth2","frr114:eth6"]
+    - endpoints: ["frr232:eth3","frr124:eth6"]
+    - endpoints: ["frr232:eth4","frr134:eth6"]
+
+    #hosts
+    - endpoints: ["frr001:eth5","h01:eth1"]
+    - endpoints: ["frr002:eth5","h02:eth1"]
+    - endpoints: ["frr003:eth5","h03:eth1"]
+    - endpoints: ["frr004:eth5","h04:eth1"]
+    - endpoints: ["frr011:eth5","h11:eth1"]
+    - endpoints: ["frr012:eth5","h12:eth1"]
+    - endpoints: ["frr013:eth5","h13:eth1"]
+    - endpoints: ["frr014:eth5","h14:eth1"]
+    - endpoints: ["frr021:eth5","h21:eth1"]
+    - endpoints: ["frr022:eth5","h22:eth1"]
+    - endpoints: ["frr023:eth5","h23:eth1"]
+    - endpoints: ["frr024:eth5","h24:eth1"]
+    - endpoints: ["frr031:eth5","h31:eth1"]
+    - endpoints: ["frr032:eth5","h32:eth1"]
+    - endpoints: ["frr033:eth5","h33:eth1"]
+    - endpoints: ["frr034:eth5","h34:eth1"]
+
+
+
+

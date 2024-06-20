@@ -1,0 +1,22 @@
+
+infra link addresses within a pod
+10.1[pod].[link].[router number]/24
+2001:db8:1[pod]:[link]::[router number]/64
+
+infra link address within a plane
+10.2[plane].[link].[router number]/24
+2001:db8:2[plane]:[link]::[router number]/64
+
+host facing interface
+10.4.[host number].[interface number]/24
+2001:db8:4:[router number]::[interface number]/64
+
+loopback interface
+10.3.[router number].1/24
+2001:db8:3:[router number]::1/64
+
+AS Number
+for stage 0 -- 65[router number]
+for stage 1 -- 651[pod]0
+for stage 2 -- 652[plane]0
+
