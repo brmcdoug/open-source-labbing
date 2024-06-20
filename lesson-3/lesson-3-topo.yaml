@@ -61,10 +61,10 @@ topology:
     ans-br2:
       kind: bridge
 
-    frr-2-external:
+    frr-2-ext:
       kind: bridge
 
-    frr-3-external:
+    frr-3-ext:
       kind: bridge
 
   links:
