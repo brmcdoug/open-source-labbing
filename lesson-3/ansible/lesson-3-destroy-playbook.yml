@@ -15,7 +15,7 @@
       ignore_errors: yes
 
     - name: delete linux clab files
-      command: "rm -r clab-ext/"
+      command: "rm -r clab-ans/"
       ignore_errors: yes
 
     - name: labbing.log 
