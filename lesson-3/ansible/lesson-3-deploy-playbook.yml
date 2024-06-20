@@ -19,11 +19,11 @@
   become: true
   tasks:
     - name: add linux host bridges for external connectivity to FRR topology
-      command: "sudo util/add-bridges.sh"
+      command: "util/add-bridges.sh"
       ignore_errors: yes
 
     - name: execute containerlab deploy   
-      command: "sudo containerlab deploy -t ../lesson-3-topo.yaml"
+      command: "containerlab deploy -t ../lesson-3-topo.yaml"
       ignore_errors: yes
 
     - name: labbing.log 
