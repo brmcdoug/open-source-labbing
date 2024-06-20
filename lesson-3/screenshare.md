@@ -105,4 +105,7 @@ ssh cisco@clab-ext-xrd02
 show bgp ipv6 uni sum
 
 ssh cisco@clab-ext-xrd01
+show isis database
+show bgp ipv6 uni sum
+ping fc00:0:3::1 source lo0
 ```

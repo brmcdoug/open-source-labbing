@@ -1,0 +1,41 @@
+---
+
+# ansible-playbook -i hosts lesson-3.3-srv6-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+
+- name: Update frr-1 thru frr-3 configurations
+  hosts: frr
+  become: true
+  tasks: 
+    - name: Copy srv6 frr.conf file to frr nodes
+      copy:
+        src: "{{ inventory_hostname }}/srv6/frr.conf"
+        dest: "/etc/frr/frr.conf"
+        mode: 0644
+
+    - name: restart frr on nodes 1-3
+      command: "sudo /usr/lib/frr/frr restart"
+      register: frr_restart
+    - debug: var=frr_restart.stdout_lines
+      ignore_errors: yes
+
+    - name: capture frr restart to logfile
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "
+        
+        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: FRR restart status for node {{ inventory_hostname }} {{ frr_restart.stdout }}
+        "
+        create: yes
+      delegate_to: localhost
+
+    - name: labbing.log config files
+      become: false
+      lineinfile:
+        path: "logs/labbing.log"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: config files with srv6 loaded and frr restarted"
+        create: yes
+      delegate_to: localhost
+
+
+
