@@ -23,9 +23,6 @@ topology:
     frr-4:
       kind: linux
       image: bmcdougall/frr-srv6-usid:1.4
-      # binds:
-      #   - config/frr-4/daemons:/etc/frr/daemons
-      #   - config/frr-4/frr-4.conf:/etc/frr/frr.conf
       exec: 
         - sudo /usr/lib/frr/frr start
         - sudo service ssh start
@@ -35,14 +32,12 @@ topology:
       kind: cisco_xrd
       image: ios-xr/xrd-control-plane:24.1.1
       mgmt-ipv4: 172.20.1.205
-      #startup-config: config/xrd01.cfg
       startup-config: ansible/files/xrd01/xrd01.cfg
 
     xrd02:
       kind: cisco_xrd
       image: ios-xr/xrd-control-plane:24.1.1
       mgmt-ipv4: 172.20.1.206
-      #startup-config: config/xrd02.cfg
       startup-config: ansible/files/xrd02/xrd02.cfg
 
     xrd01-host:
