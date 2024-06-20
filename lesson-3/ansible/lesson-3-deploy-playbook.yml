@@ -2,16 +2,10 @@
 
 # ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
       
-- name: logging and motd
+- name: start logging
   hosts: localhost
   become: true
   tasks:
-    - name: Copy motd file to frr and pc nodes
-      copy:
-        src: "motd"
-        dest: "/etc/motd"
-        mode: 0644 
-
     - name: labbing.log start message
       become: false
       lineinfile:
@@ -36,7 +30,7 @@
       become: false
       lineinfile:
         path: "logs/labbing.log"
-        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: topology deployed"
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: topology deployed, starting base config playbook"
         create: yes
       delegate_to: localhost
 
