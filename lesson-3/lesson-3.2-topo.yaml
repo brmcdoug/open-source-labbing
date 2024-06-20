@@ -35,13 +35,15 @@ topology:
       kind: cisco_xrd
       image: ios-xr/xrd-control-plane:24.1.1
       mgmt-ipv4: 172.20.1.205
-      startup-config: config/xrd01.cfg
+      #startup-config: config/xrd01.cfg
+      startup-config: ansible/files/xrd-1/xrd-1.cfg
 
     xrd02:
       kind: cisco_xrd
       image: ios-xr/xrd-control-plane:24.1.1
       mgmt-ipv4: 172.20.1.206
-      startup-config: config/xrd02.cfg
+      #startup-config: config/xrd02.cfg
+      startup-config: ansible/files/xrd-2/xrd-2.cfg
 
     xrd01-host:
       kind: bridge
