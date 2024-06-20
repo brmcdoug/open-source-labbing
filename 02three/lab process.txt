@@ -1,0 +1,226 @@
+cd 02three
+
+less frr-1/stage1.conf
+note there are no ipv4 or ipv6 interface addresses
+
+==================================================================
+clab deploy -t stage1.yaml
+note container table
+
+clab inspect –a to see the container table again
+
+==================================================================
+docker exec -it clab-oll2-frr-1 vtysh
+
+conf t
+
+interface eth1
+ description to frr-2 eth1
+ ip address 10.1.1.1/24
+exit
+!
+interface eth2
+ description to frr-3 eth2
+ ip address 10.1.3.1/24
+exit
+!
+interface eth3
+ description to pc-1
+ ip address 10.3.1.1/24
+exit
+!
+interface lo
+ ip address 10.2.0.1/32
+exit
+
+----
+all other routers already have ipv4 address configured
+----
+
+ping 10.1.1.2
+ping 10.1.3.3
+
+ping 10.2.0.2 doesn’t work
+
+==================================================================
+docker exec -it clab-oll2-frr-1 vtysh
+conf t
+
+interface eth1
+ ipv6 address 2001:db8:1:1::1/64
+exit
+!
+interface eth2
+ ipv6 address 2001:db8:1:3::1/64
+exit
+!
+interface eth3
+ ipv6 address 2001:db8:3:1::1/64
+exit
+!
+interface lo
+ ipv6 address 2001:db8:2::1/128
+exit
+
+----
+all other routers already have ipv6 address configured
+----
+
+ping ipv6 2001:db8:1:1::2
+ping ipv6 2001:db8:1:3::3
+
+ping ipv6 2001:db8:2::2 doesn’t work
+
+==================================================================
+wr in
+there will be errors, but it still works
+
+less rr-1/stage1.conf
+there are now ipv4 and ipv6 addresses
+illustrates file binding from container to local file system
+
+==================================================================
+clab destroy -t stage1.yaml
+clab deploy -t stage2.yaml
+
+docker exec -it clab-oll2-frr-1 vtysh
+conf t
+
+router isis labnet
+ is-type level-2-only 
+ net 49.0001.0000.0000.0001.00
+!
+interface eth1
+ ip router isis labnet
+ ipv6 router isis labnet
+exit
+!
+interface eth2
+ ip router isis labnet
+ ipv6 router isis labnet
+exit
+!
+interface lo
+ ip router isis labnet
+ ipv6 router isis labnet
+exit
+
+----
+all other routers already have is-is configured
+----
+
+==================================================================
+show isis database
+show ip route
+show ipv6 route
+
+ping 10.2.0.2
+ping 10.2.0.3
+ping ipv6 2001:db8:2::2
+ping ipv6 2001:db8:2::3
+
+ping 10.3.2.3
+eth3 on frr-3
+eth3 is not included in is-is on either frr-1 or frr-3; we are leaving these for bgp
+
+==================================================================
+clab destroy -t stage2.yaml
+clab deploy -t stage3.yaml
+
+docker exec -it clab-oll2-frr-1 vtysh
+conf t
+
+router bgp 65001
+ no bgp ebgp-requires-policy
+ neighbor 2001:db8:2::2 remote-as 65002
+ neighbor 2001:db8:2::2 ebgp-multihop 10
+ neighbor 2001:db8:2::2 update-source lo
+ neighbor 2001:db8:2::3 remote-as 65003
+ neighbor 2001:db8:2::3 ebgp-multihop 10
+ neighbor 2001:db8:2::3 update-source lo
+ !
+ address-family ipv4 unicast
+  network 10.1.3.0/24
+  network 10.2.0.1/32
+ exit-address-family
+ !
+ address-family ipv6 unicast
+  network 2001:db8:2::1/128
+  network 2001:db8:3:1::/64
+  neighbor 2001:db8:2::2 activate
+  neighbor 2001:db8:2::3 activate
+ exit-address-family
+exit
+
+----
+all other routers already have bgp configured
+
+ebgp multihop configuration across loopbacks
+update-source and ebgp-multihop
+
+network statements including eth3 for host connections and loopbacks
+----
+
+==================================================================
+show bgp ipv4
+show bgp ipv6
+show ip route
+show ipv6 route
+
+ping 10.2.0.2 lo on frr-2
+ping ipv6 2001:db8:2::2
+ping 10.2.0.3 lo on frr-2
+ping ipv6 2001:db8:2::3
+ping 10.2.3.3 eth3 on frr-3
+ping ipv6 2001:db8:2:2::3 eth3 on frr-2
+
+ping 10.2.3.10 host
+ping ipv6 2001:db8:2:1::10 host
+no host configuration yet
+
+exit
+
+==================================================================
+docker exec -it clab-oll2-pc-1 bash
+
+apt update
+apt install iproute2 –y
+apt install iputils-ping
+
+ip a
+note no IP address on eth1
+
+ip a add 10.3.1.10/24 dev eth1
+ip -6 a add 2001:db8:3:1::10/64 dev eth1
+
+ip route add 10.0.0.0/8 via 10.3.1.1
+ip route we should see the added route
+
+ip -6 route add 2001:db8::/32 via 2001:db8:3:1::1
+ip -6 route we should see the added route
+
+==================================================================
+ping 10.2.0.1
+ping 10.2.0.2
+ping 10.2.0.3
+ping 10.2.1.10
+
+==================================================================
+clab destroy –t stage3.yaml
+
+clab deploy -t stage4.yaml
+
+docker exec -it clab-oll2-frr-1 bash
+/usr/lib/frr/frrinit.sh start
+exit
+
+docker exec -it clab-oll2-frr-1 vtysh
+
+sharp ?
+
+add some routes
+show routes
+redistribute routes
+
+clab destroy -t stage4.yaml
+

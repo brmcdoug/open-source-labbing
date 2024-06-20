@@ -1,0 +1,34 @@
+
+
+
+clab deploy -t norouting.yaml
+
+just look at ip addresses
+
+clab destroy -t norouting.yaml
+
+===============================
+
+clab deploy -t bgponly.yaml
+
+uses all eBGP connections
+
+docker exec -it clab-bfrt-frr01 vtysh
+docker exec -it clab-bfrt-frr11 vtysh
+
+show bgp ipv6
+shows all host connections, 3’s
+
+clab destroy -t bgponly.yaml
+
+===============================
+
+clab deploy -t igp.yaml
+
+sho isis route
+shows all loopbacks, infra links, etc.
+
+clab destroy -t igp.yaml
+
+
+
