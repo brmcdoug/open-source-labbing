@@ -74,8 +74,8 @@ topology:
     - endpoints: ["frr-1:eth4", "ans-br1:frr-1-eth4"]
 
     - endpoints: ["frr-2:eth2", "frr-3:eth1"]
-    - endpoints: ["frr-2:eth3", "frr-2-external:frr-2-eth3"]
+    - endpoints: ["frr-2:eth3", "frr-2-ext:frr-2-eth3"]
     - endpoints: ["frr-2:eth4", "ans-br2:frr-2-eth4"]
 
     - endpoints: ["frr-3:eth3", "pc-2:eth1"]
-    - endpoints: ["frr-3:eth4", "frr-3-external:frr-3-eth4"]
+    - endpoints: ["frr-3:eth4", "frr-3-ext:frr-3-eth4"]
