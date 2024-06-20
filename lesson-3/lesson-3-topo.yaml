@@ -12,7 +12,7 @@
 #
 #
 
-name: ansible
+name: ans
 
 mgmt:
   network: frr_mgt_net
