@@ -3,18 +3,18 @@
 ```
 export PROMPT_DIRTRIM=1
 ```
-
-### Destroy lesson-3 topo
+### cleanup any stale lesson-3 topologies
 ```
+ansible-playbook -i hosts lesson-3.2-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
+
 ansible-playbook -i hosts lesson-3-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
 ```
 
+### Deploy lesson-3 topo
 ```
 more lesson-3-deploy-playbook.yml
 more lesson-3-frr-base-playbook.yml
 ```
-
-### Deploy lesson-3 topo
 ```
 ansible-playbook -i hosts lesson-3-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 ```
@@ -62,8 +62,47 @@ more lesson-3-frr-update-playbook.yml
 ansible-playbook -i hosts lesson-3-frr-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 ```
 
-### 3.2 deploy
-ansible-playbook -i hosts lesson-3.2-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+#### verify update - review ansible stdout for bfdd status
+```
+docker exec -it clab-ans-frr-3 vtysh
+show run
+show bfd peers
+ping 10.10.2.2
+exit
 
-### 3.2 Destroy
-ansible-playbook -i hosts lesson-3.2-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
+docker exec -it clab-ans-pc-1 sh
+ip a
+ip route
+ping 10.0.0.1
+ping 10.0.0.2
+```
+
+### 3.2 deploy 
+```
+more lesson-3.2-deploy-playbook.yml
+more lesson-3.2-update-playbook.yml
+
+# look for MTU, etc.
+```
+```
+ansible-playbook -i hosts lesson-3.2-deploy-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+```
+
+#### verify 3.2
+```
+more logs/labbing.logs
+containerlab inspect -a
+brctl show
+
+docker exec -it clab-ext-frr-4 bash
+ifconfig
+vtysh
+show run
+show isis database
+show bgp sum
+
+ssh cisco@clab-ext-xrd02
+show bgp ipv6 uni sum
+
+ssh cisco@clab-ext-xrd01
+```
