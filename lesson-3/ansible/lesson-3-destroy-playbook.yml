@@ -11,7 +11,7 @@
       ignore_errors: yes
 
     - name: delete linux host bridge instances
-      command: "./util/del-bridges.sh"
+      command: " sudo /util/del-bridges.sh"
       ignore_errors: yes
 
     - name: delete linux clab files
