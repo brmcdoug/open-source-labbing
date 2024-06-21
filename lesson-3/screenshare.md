@@ -107,7 +107,7 @@ show bgp ipv6 uni sum
 ssh cisco@clab-ext-xrd01
 show isis database
 show bgp ipv6 uni sum
-ping fc00:0:3::1 source lo0
+ping fc00:0:4::1 source lo1
 ```
 
 ### 3.3 SRv6
@@ -118,7 +118,6 @@ more lesson-3.3-srv6-playbook.yml
 ```
 ansible-playbook -i hosts lesson-3.3-srv6-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 ```
-
 
 #### verify 3.3 srv6
 
