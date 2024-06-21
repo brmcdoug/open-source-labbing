@@ -109,3 +109,28 @@ show isis database
 show bgp ipv6 uni sum
 ping fc00:0:3::1 source lo0
 ```
+
+### 3.3 SRv6
+```
+more lesson-3.3-srv6-playbook.yml
+```
+
+```
+ansible-playbook -i hosts lesson-3.3-srv6-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
+```
+
+
+#### verify 3.3 srv6
+
+```
+docker exec -it clab-ans-frr-3 bash
+vtysh
+show bgp ipv4 vpn
+show bgp ipv4 vpn rd 10.0.0.5:0 13.13.13.0/24
+exit
+ip route show vrf blue
+
+ssh cisco@clab-ext-xrd01
+show bgp vrf blue   
+show bgp vpnv4 uni rd 10.0.0.5:0 10.10.2.0/24 det
+```
