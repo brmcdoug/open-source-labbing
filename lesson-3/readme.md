@@ -63,7 +63,17 @@ Prior to running the FRR update playbook we should attempt to configure BFD on o
 ansible-playbook -i hosts  lesson-3-frr-update-playbook.yml -e "ansible_user=frr ansible_ssh_pass=frr123 ansible_sudo_pass=frr123" -vv
 ```
 
-### End of Lesson-3
+### 3.2: connecting to the outside world
+
+1. playbook adds a new 'internal' router xrd01 and a pair of external nodes: frr-4 and xrd02
+2. new topology file. new nodes are plumbed to existing topology via prebuilt linux bridge instances
+3. eBGP between frr-2/3 and frr-4/xrd02
+
+### 3.3: SRv6 on FRR and XRd
+1. SRv6 locators established for ISIS and BGP
+2. SRv6 L3VPN with frr-3 and xrd01 as PE nodes
+
+
 
 
 
