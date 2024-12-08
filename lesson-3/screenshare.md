@@ -10,6 +10,11 @@ ansible-playbook -i hosts lesson-3.2-destroy-playbook.yml -e "ansible_user=cisco
 ansible-playbook -i hosts lesson-3-destroy-playbook.yml -e "ansible_user=cisco ansible_ssh_pass=cisco123 ansible_sudo_pass=cisco123" -vv
 ```
 
+### Ansible inventory
+```
+cat hosts
+```
+
 ### Deploy lesson-3 topo
 ```
 more lesson-3-deploy-playbook.yml

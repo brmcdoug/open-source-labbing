@@ -1,3 +1,5 @@
+
+
 cd 02three
 
 less frr-1/stage1.conf
@@ -7,7 +9,8 @@ note there are no ipv4 or ipv6 interface addresses
 clab deploy -t stage1.yaml
 note container table
 
-clab inspect –a to see the container table again
+clab inspect –a 
+to see the container table again
 
 ==================================================================
 docker exec -it clab-oll2-frr-1 vtysh
@@ -72,10 +75,10 @@ ping ipv6 2001:db8:1:3::3
 ping ipv6 2001:db8:2::2 doesn’t work
 
 ==================================================================
-wr in
+wr integrated
 there will be errors, but it still works
 
-less rr-1/stage1.conf
+less frr-1/stage1.conf
 there are now ipv4 and ipv6 addresses
 illustrates file binding from container to local file system
 
