@@ -78,8 +78,8 @@ exit
 docker exec -it clab-ans-pc-1 sh
 ip a
 ip route
-ping 10.0.0.1
-ping 10.0.0.2
+ping 10.0.0.1 -c 2
+ping 10.0.0.2 -c 2
 ```
 
 ### 3.2 deploy 
@@ -95,8 +95,8 @@ ansible-playbook -i hosts lesson-3.2-deploy-playbook.yml -e "ansible_user=frr an
 
 #### verify 3.2
 ```
-more logs/labbing.logs
-containerlab inspect -a
+more logs/labbing.log
+clab inspect -a
 brctl show
 
 docker exec -it clab-ext-frr-4 bash

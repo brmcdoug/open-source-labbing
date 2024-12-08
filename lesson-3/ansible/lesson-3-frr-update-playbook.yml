@@ -60,9 +60,9 @@
       command: "sudo /usr/lib/frr/frr restart"
       ignore_errors: yes
 
-    - name: Wait for 10 seconds after FRR restart
+    - name: Wait for 30 seconds after FRR restart
       pause:
-        seconds: 10
+        seconds: 30
 
     - name: labbing.log config files
       become: false

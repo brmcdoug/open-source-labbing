@@ -10,9 +10,9 @@
       command: "containerlab destroy -t ../lesson-3-topo.yaml"
       ignore_errors: yes
 
-    - name: delete linux host bridge instances
-      command: " sudo util/del-bridges.sh"
-      ignore_errors: yes
+    # - name: delete linux host bridge instances
+    #   command: " sudo util/del-bridges.sh"
+    #   ignore_errors: yes
 
     - name: delete linux clab files
       command: "rm -r clab-ans/"

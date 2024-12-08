@@ -20,9 +20,12 @@
   become: true
   tasks:
 
-  tasks:
     - name: add linux host bridges for external connectivity to FRR topology
       command: "sudo util/update-bridges.sh"
+      ignore_errors: yes
+
+    - name: apply sysctl settings
+      command: "sudo sysctl -p"
       ignore_errors: yes
 
     - name: execute containerlab deploy   
