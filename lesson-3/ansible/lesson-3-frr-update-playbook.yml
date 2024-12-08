@@ -45,7 +45,6 @@
       lineinfile:
         path: "logs/labbing.log"
         line: "
-        
         {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: BFD daemon status for FRR node {{ inventory_hostname }} {{ daemons.stdout }}
         "
         create: yes
@@ -60,6 +59,10 @@
     - name: restart frr
       command: "sudo /usr/lib/frr/frr restart"
       ignore_errors: yes
+
+    - name: Wait for 10 seconds after FRR restart
+      pause:
+        seconds: 10
 
     - name: labbing.log config files
       become: false
