@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 sudo brctl addbr xrd01-host
 sudo brctl addbr xrd01-host2

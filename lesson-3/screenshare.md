@@ -1,5 +1,7 @@
 ### screenshare steps
 
+1. Show lesson-3-topo.yaml and talk about frr image
+
 ```
 export PROMPT_DIRTRIM=1
 ```
@@ -127,8 +129,7 @@ ansible-playbook -i hosts lesson-3.3-srv6-playbook.yml -e "ansible_user=frr ansi
 #### verify 3.3 srv6
 
 ```
-docker exec -it clab-ans-frr-3 bash
-vtysh
+docker exec -it clab-ans-frr-3 vtysh
 show bgp ipv4 vpn
 show bgp ipv4 vpn rd 10.0.0.5:0 13.13.13.0/24
 exit

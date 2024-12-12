@@ -51,10 +51,7 @@
       become: false
       lineinfile:
         path: "logs/labbing.log"
-        line: "
-        
-        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: FRR restart status for node {{ inventory_hostname }} {{ frr_restart.stdout }}
-        "
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: FRR restart status for node {{ inventory_hostname }} {{ frr_restart.stdout }}"
         create: yes
       delegate_to: localhost
 

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 sudo ifconfig ans-br1 down
 sudo ifconfig ans-br2 down

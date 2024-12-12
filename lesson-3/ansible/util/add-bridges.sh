@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 sudo brctl addbr ans-br1
 sudo brctl addbr ans-br2

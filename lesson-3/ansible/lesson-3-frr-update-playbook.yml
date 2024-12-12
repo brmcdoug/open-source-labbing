@@ -44,9 +44,7 @@
       become: false
       lineinfile:
         path: "logs/labbing.log"
-        line: "
-        {{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: BFD daemon status for FRR node {{ inventory_hostname }} {{ daemons.stdout }}
-        "
+        line: "{{ ansible_date_time.date }} {{ansible_date_time.time}} {{ansible_date_time.tz}}: BFD daemon status for FRR node {{ inventory_hostname }} {{ daemons.stdout }}"
         create: yes
       delegate_to: localhost
 
